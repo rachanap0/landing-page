@@ -13,14 +13,19 @@ This repository contains the code for my personal portfolio website, where I sho
 **Technologies Used**
 
 **HTML5 & CSS3:** For the basic structure and styling of the website.
+
 **Bootstrap:** To create a responsive and modern design.
+
 **JavaScript:** To add interactivity and dynamic content.
+
 **Formspree:** For managing the contact form submissions.
 
 **Future Plans**
 
 **Blog Section:** I plan to add a blog to share insights and experiences.
+
 **Project Demos:** Live demos for select projects.
+
 **SEO Optimization:** To increase the site’s visibility on search engines.
 
 **Contact**
