@@ -11072,3 +11072,53 @@ header.masthead h1, header.masthead .h1 {
   background-color: #ff6f61;
   color: #ffffff;
 }
+
+/* Minimal hero polish */
+.masthead { position: relative; }
+.masthead::before{
+  content:""; position:absolute; inset:0;
+  background: rgba(0,0,0,.28);  /* adjust 0.20–0.35 to taste */
+  pointer-events: none;          /* ensure buttons remain clickable */
+}
+.masthead .container{ position:relative; }  /* keep text above overlay */
+.hero-line{ max-width: 760px; margin: 0 auto 1.5rem; font-size:1rem; line-height:1.55; }
+
+.masthead h1, .masthead h3 { 
+  font-family: "Merriweather Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif !important;
+  letter-spacing: -0.01em;
+}
+
+
+/* Experience — clean cards (neutral) */
+.exp-list { display: grid; gap: 1.1rem; }
+.exp-card{
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.08);
+  border-left: 4px solid var(--bs-primary, #0d6efd); /* use Bootstrap primary if set */
+  border-radius: .75rem;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,.04);
+}
+.exp-card h5 { font-size: 1.05rem; margin-bottom: 0; }
+.exp-dates { white-space: nowrap; }
+.exp-points li { margin-bottom: .35rem; }
+
+/* Role chips */
+.role-chip{
+  display: inline-block;
+  font-size: .85rem;
+  padding: .2rem .55rem;
+  border-radius: 999px;
+  color: var(--bs-primary, #0d6efd);
+  background: rgba(var(--bs-primary-rgb, 13,110,253), .08);
+  border: 1px solid rgba(var(--bs-primary-rgb, 13,110,253), .18);
+  margin-right: .35rem;
+}
+.role-chip.soft{
+  color: #6c757d;
+  background: rgba(108,117,125,.08);
+  border-color: rgba(108,117,125,.2);
+}
+
+/* Section rhythm */
+#experience .divider { margin-bottom: 1.75rem; }
