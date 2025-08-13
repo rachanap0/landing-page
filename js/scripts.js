@@ -57,3 +57,30 @@ window.addEventListener('DOMContentLoaded', event => {
     });
 
 });
+
+// Simple count-up for KPI numbers
+(function () {
+  const els = document.querySelectorAll('.stat-number');
+  const ease = t => 1 - Math.pow(1 - t, 3); // easeOutCubic
+
+  function animate(el){
+    const target = parseFloat(el.getAttribute('data-target') || '0');
+    const start = performance.now();
+    const dur = 900 + Math.random()*400;
+
+    function tick(now){
+      const p = Math.min(1, (now - start)/dur);
+      el.textContent = Math.round(ease(p) * target).toLocaleString();
+      if(p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // trigger when the strip scrolls into view
+  const section = document.getElementById('stats');
+  if (!section) return;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { els.forEach(animate); io.disconnect(); } });
+  }, { threshold: 0.3 });
+  io.observe(section);
+})();
