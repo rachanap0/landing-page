@@ -33,8 +33,7 @@ html{
   height: 100%;
   scroll-behavior: smooth;
   scroll-padding-top: var(--nav-h);
-  /* strong snap for sticky section stops */
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y mandatory; /* strong snap for section stops */
 }
 body{
   margin: 0;
@@ -49,7 +48,6 @@ body{
   background-color: var(--bg-0);
   line-height: 1.6;
 }
-
 h1,h2,h3,h4,h5{
   font-family: "Merriweather", Georgia, serif;
   letter-spacing: .2px;
@@ -61,9 +59,11 @@ a:hover{ color:#ffffff; }
 
 /* Section rhythm */
 .section-about,
-.page-section{ padding: 4.5rem 0;
-scroll-snap-align: start;
-  scroll-snap-stop: always; }
+.page-section{
+  padding: 4.5rem 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
 .divider{
   width: 64px; height: 3px; border:0;
   background: linear-gradient(90deg, rgba(var(--brand-rgb),.65), rgba(var(--brand-rgb),.15));
@@ -97,7 +97,7 @@ scroll-snap-align: start;
 /* ========== Hero / Masthead ========== */
 .masthead{
   position: relative;
-  min-height: 100svh;         /* full viewport including mobile UI */
+  min-height: 100svh;
   display: grid;
   place-items: center;
   text-align: center;
@@ -109,12 +109,10 @@ scroll-snap-align: start;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  overflow: clip;             /* prevent anything below from peeking up */
-  z-index: 5;                 /* sits above the docked stats */
+  overflow: clip;
+  z-index: 5;
 }
-@supports (height: 100dvh){
-  .masthead{ min-height: 100dvh; } /* dynamic viewport on modern browsers */
-}
+@supports (height: 100dvh){ .masthead{ min-height: 100dvh; } }
 .masthead::before{
   content: "";
   position: absolute; inset: 0;
@@ -132,13 +130,8 @@ scroll-snap-align: start;
 .masthead .btn{ box-shadow: 0 10px 22px rgba(0,0,0,.25); }
 
 /* ========== Buttons ========== */
-.btn-primary{
-  background: rgb(var(--brand-rgb));
-  border-color: rgb(var(--brand-rgb));
-}
-.btn-primary:hover{
-  background:#5597ff; border-color:#5597ff;
-}
+.btn-primary{ background: rgb(var(--brand-rgb)); border-color: rgb(var(--brand-rgb)); }
+.btn-primary:hover{ background:#5597ff; border-color:#5597ff; }
 .btn-outline-light{ color:#fff; border-color: rgba(255,255,255,.5); }
 .btn-outline-light:hover{ background:#fff; color:#0b1220; }
 
@@ -155,9 +148,8 @@ scroll-snap-align: start;
 }
 .stats-strip.stats-docked{
   position: absolute;
-  left: 0; right: 0; top: 0;  /* dock to top of About */
-  z-index: 2;                 /* stays below hero + navbar */
-  border-top: 0;              /* no seam under nav/hero */
+  left: 0; right: 0; top: 0;
+  z-index: 2; border-top: 0;
 }
 .stat{ margin:.3rem 0; }
 .stat-number{
@@ -170,7 +162,6 @@ scroll-snap-align: start;
 
 /* ========== About ========== */
 #about{ background: transparent; }
-
 .link-muted{
   color:var(--ink-3); text-decoration:none;
   border-bottom:1px solid rgba(255,255,255,.25);
@@ -178,52 +169,35 @@ scroll-snap-align: start;
 }
 .link-muted:hover{ color:#cfe2ff; border-color:#cfe2ff; }
 
+/* About content */
 .section-about{
   position: relative;
-  /* space for the title below the docked strip + navbar height */
   padding-top: calc(var(--nav-h) + 56px);
   padding-bottom: 0;
   background: radial-gradient(1200px 600px at 50% -200px, rgba(77,130,255,0.08), transparent 60%);
 }
-.section-about .about-wrap{
-  max-width: 1100px; margin: 0 auto; padding: 0 20px;
-}
-
-/* Title */
+.section-about .about-wrap{ max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 .section-about .title{
   font-size: clamp(28px, 3.2vw, 40px);
   letter-spacing: 0.02em;
-  text-align: center;
-  margin-bottom: 8px;
+  text-align: center; margin-bottom: 8px;
 }
 .section-about .title::after{
-  content: "";
-  display: block;
-  width: 64px; height: 3px;
+  content: ""; display: block; width: 64px; height: 3px;
   margin: 14px auto 0;
   background: linear-gradient(90deg, #4d82ff, #6aa2ff);
   border-radius: 999px; opacity: .9;
 }
-
-/* Body */
 .section-about .lead{
-  max-width: 900px;
-  margin: 24px auto 0;
+  max-width: 900px; margin: 24px auto 0;
   font-size: clamp(16px, 1.35vw, 20px);
-  line-height: 1.75;
-  color: rgba(255,255,255,0.85);
+  line-height: 1.75; color: rgba(255,255,255,0.85);
   text-align: left;
 }
-.section-about .lead b,
-.section-about .lead strong{ color:#fff; }
-
-/* Highlights (chips) */
+.section-about .lead b, .section-about .lead strong{ color:#fff; }
 .section-about .highlights{
-  display:grid;
-  grid-template-columns: repeat(3, minmax(0,1fr));
-  gap:12px;
-  max-width:900px;
-  margin:14px auto 0;
+  display:grid; grid-template-columns: repeat(3, minmax(0,1fr));
+  gap:12px; max-width:900px; margin:14px auto 0;
 }
 .highlight{
   padding:10px 12px; border-radius:12px;
@@ -232,11 +206,7 @@ scroll-snap-align: start;
   font-size:14px; line-height:1.45; color: rgba(255,255,255,0.86);
   text-align:center;
 }
-@media (max-width: 720px){
-  .section-about .highlights{ grid-template-columns: 1fr; }
-}
-
-/* Actions */
+@media (max-width: 720px){ .section-about .highlights{ grid-template-columns: 1fr; } }
 .section-about .actions{
   display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:24px;
 }
@@ -270,14 +240,6 @@ scroll-snap-align: start;
 .level-chip.good{ color:#8ac1ff; border-color:#3569d8; background:rgba(53,105,216,.1); }
 .level-chip.growing{ color:#b0bacd; border-color:#3e4556; background:rgba(62,69,86,.22); }
 
-/* Journey (timeline) */
-.journey{ list-style:none; padding-left:1rem; margin:0; position:relative; }
-.journey::before{ content:""; position:absolute; left:.3rem; top:.2rem; bottom:.2rem; width:2px; background:rgba(255,255,255,.08); }
-.journey li{ position:relative; margin-bottom:.8rem; padding-left:1rem; }
-.journey li::before{ content:""; position:absolute; left:-.05rem; top:.45rem; width:8px; height:8px; border-radius:50%; background: rgb(var(--brand-rgb)); box-shadow:0 0 0 4px rgba(var(--brand-rgb), .15); }
-.journey .when{ font-weight:700; font-size:.95rem; color:#cfe2ff; }
-.journey .what{ color: var(--ink-2); }
-
 /* Mini cards */
 .mini-card{ background: var(--panel); border: 1px solid var(--stroke); border-radius:.9rem; padding:.9rem 1rem; display:flex; flex-direction:column; }
 .mini-tags span{ display:inline-block; font-size:.75rem; color:#9fb6d9; border:1px solid rgba(159,182,217,.35); padding:.15rem .5rem; border-radius:999px; margin-right:.35rem; }
@@ -307,22 +269,6 @@ scroll-snap-align: start;
 .role-chip{ display:inline-block; font-size:.85rem; padding:.2rem .55rem; border-radius:999px; color:#9ac1ff; background:rgba(154,193,255,.08); border:1px solid rgba(154,193,255,.25); margin-right:.35rem; }
 .role-chip.soft{ color:#9aa6bf; background:rgba(154,166,191,.1); border-color:rgba(154,166,191,.25); }
 
-/* Leadership grid */
-.lead-grid{ display:grid; gap: 1rem; grid-template-columns: repeat(4, minmax(0,1fr)); }
-@media (max-width: 992px){ .lead-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
-@media (max-width: 576px){ .lead-grid{ grid-template-columns: 1fr; } }
-.lead-card{
-  display:flex; flex-direction:column; gap:.4rem; text-decoration:none; color:inherit;
-  background: var(--panel); border:1px solid var(--stroke);
-  border-radius:.9rem; padding:1rem 1.1rem; box-shadow:0 6px 22px rgba(0,0,0,.25);
-  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-}
-.lead-card:hover{ transform:translateY(-2px); box-shadow:0 12px 28px rgba(0,0,0,.32); border-color:rgba(255,255,255,.12); }
-.lead-icon{ width:36px; height:36px; border-radius:999px; display:grid; place-items:center; color: rgb(var(--brand-rgb)); background: rgba(var(--brand-rgb), .12); border:1px solid rgba(var(--brand-rgb), .25); }
-.lead-icon i{ font-size:18px; line-height:1; }
-.lead-title{ font-weight:700; }
-.lead-meta{ color: var(--ink-3); }
-
 /* Utilities */
 .text-white-75{ color: rgba(255,255,255,.85) !important; }
 hr{ border-color: var(--stroke); opacity:1; }
@@ -330,356 +276,72 @@ hr{ border-color: var(--stroke); opacity:1; }
 /* ========== Scroll Snap Panels & Reveal ========== */
 .snap{
   scroll-snap-align: start;
-  scroll-snap-stop: always;                 /* “stick” on each section */
+  scroll-snap-stop: always;
   min-height: 100svh;
   display:flex; align-items:center;
   padding-block: clamp(64px, 10vh, 120px);
 }
-@supports (height: 100dvh){
-  .snap{ min-height: 100dvh; }
-}
+@supports (height: 100dvh){ .snap{ min-height: 100dvh; } }
 .snap[data-reveal]{ opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; will-change: opacity, transform; }
 .snap.is-visible{ opacity: 1; transform: translateY(0); }
-
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior: auto; }
   .snap{ min-height: auto; }
   .snap[data-reveal]{ opacity:1; transform:none; transition:none; }
 }
 
+/* =========================================================
+   LEADERSHIP / INVOLVEMENT — FINAL, CONSOLIDATED STYLES
+   ========================================================= */
 
-/* ===== Leadership split layout ===== */
-.lead-split{
-  display: grid;
-  grid-template-columns: 1fr 1.25fr;  /* timeline | gallery */
-  gap: 1.25rem;
-  align-items: start;
-}
-@media (max-width: 992px){
-  .lead-split{ grid-template-columns: 1fr; }
-}
-
-/* Timeline (left) */
-.lead-timeline{
+/* Create a hard clipping boundary for everything inside Leadership.
+   'contain: layout paint' isolates painting; 'overflow: clip' enforces
+   clipping even for GPU‑promoted layers in modern browsers. */
+#leadership{
   position: relative;
-  list-style: none;
-  margin: 0;
-  padding: 0 0 0 1.25rem;
+  z-index: 0;
+  contain: layout paint;
+  overflow: clip;                   /* <-- key fix: prevents bleed into next section */
+  min-block-size: auto; max-block-size: none;
 }
-.lead-timeline::before{
-  content: "";
-  position: absolute; left: .5rem; top: .2rem; bottom: .2rem;
-  width: 2px; background: rgba(255,255,255,.10);
+@supports not (overflow: clip){
+  /* Fallback for browsers without overflow:clip */
+  #leadership{ overflow: hidden; }
 }
-.lead-step{ position: relative; margin: 0 0 .9rem 0; padding-left: .75rem; }
-.lead-dot{
-  position: absolute; left: -1.05rem; top: .55rem;
-  width: 10px; height: 10px; border-radius: 50%;
-  background: rgb(var(--brand-rgb)); box-shadow: 0 0 0 6px rgba(var(--brand-rgb), .18);
-}
-.lead-step-link{
-  display: block; text-decoration: none; color: inherit;
-  background: var(--panel); border: 1px solid var(--stroke);
-  border-radius: .9rem; padding: .7rem .9rem;
-  transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease, background .12s ease;
-}
-.lead-step-link:hover{
-  transform: translateY(-2px);
-  border-color: rgba(255,255,255,.14);
-  box-shadow: 0 12px 28px rgba(0,0,0,.28);
-}
-.lead-step-link.is-active{
-  border-color: rgba(154,193,255,.35);
-  box-shadow: 0 14px 30px rgba(0,0,0,.32);
-  background: linear-gradient(180deg, rgba(154,193,255,.06), rgba(18,35,66,.2));
-}
-.lead-step-body{
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: .2rem .75rem;
-  align-items: baseline;
-}
-.lead-role{ font-weight: 800; color: #fff; }
-.lead-org { color: var(--ink-2); }
-.lead-meta{ color: var(--ink-3); }
+#leadership.page-section{ padding-block: clamp(48px, 7vh, 88px); }
 
-/* Gallery (right) */
-.lead-gallery-wrap{
-  background: var(--panel);
-  border: 1px solid var(--stroke);
-  border-radius: .9rem;
-  padding: 0.9rem 1rem 1rem;
-  box-shadow: 0 8px 26px rgba(0,0,0,.25);
-}
-.lead-gallery-header{
-  margin: 0 0 .5rem 0;
-  color: var(--ink-3);
-}
-.lead-gallery-grid{
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0,1fr));
-  gap: .6rem;
-}
-@media (min-width: 1200px){
-  .lead-gallery-grid{ grid-template-columns: repeat(3, minmax(0,1fr)); }
-}
-.lead-gallery-grid a{
-  display: block;
-  border-radius: .55rem;
-  overflow: hidden;
-  border: 1px solid var(--stroke);
-  position: relative;
-}
-.lead-gallery-grid img{
-  width: 100%; height: 180px; object-fit: cover; display: block;
-}
-.lead-gallery-grid a::after{
-  content: "";
-  position: absolute; inset: 0;
-  background: linear-gradient(to bottom, transparent, rgba(0,0,0,.15));
-  opacity: 0; transition: opacity .15s ease;
-}
-.lead-gallery-grid a:hover::after{ opacity: 1; }
-
-.lead-gallery-hint{ margin-top: .5rem; color: var(--ink-3); }
-
-
-/* ===== Leadership split stays 1fr | 1fr (equal columns) ===== */
-.lead-split{
+/* Split layout: timeline (left) | gallery (right) — equal columns */
+#leadership .lead-split{
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.25rem;
-  align-items: stretch;     /* both columns same height */
-}
-@media (max-width: 992px){
-  .lead-split{ grid-template-columns: 1fr; }
-}
-
-/* ===== Timeline: remove big card; keep the rail ===== */
-.lead-timeline{
-  position: relative;
-  margin: 0;
-  padding: 0 0 0 1.6rem;    /* room for the rail & dots */
-  list-style: none;
-
-  /* kill the large card look */
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-}
-.lead-timeline::before{
-  content: "";
-  position: absolute;
-  left: .58rem;             /* centers under the dot */
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: rgba(255,255,255,.10);
-}
-
-/* each step is its own card */
-.lead-step{
-  position: relative;
-  margin: 0 0 .9rem 0;
-}
-.lead-step:last-child{ margin-bottom: 0; }
-
-.lead-dot{
-  position: absolute;
-  left: -1.05rem;           /* aligns with the rail */
-  top: 1.15rem;             /* dot near top of card */
-  width: 10px; height: 10px; border-radius: 50%;
-  background: rgb(var(--brand-rgb));
-  box-shadow: 0 0 0 6px rgba(var(--brand-rgb), .18);
-}
-
-/* card for each item — vertical stack so TITLE is at top */
-.lead-step-link{
-  display: block;
-  text-decoration: none;
-  color: inherit;
-
-  background: var(--panel);
-  border: 1px solid var(--stroke);
-  border-radius: .9rem;
-  padding: .85rem 1rem;
-
-  transition: border-color .12s ease, box-shadow .12s ease, background .12s ease;
-}
-.lead-step-link:hover{
-  border-color: rgba(255,255,255,.14);
-  box-shadow: 0 10px 22px rgba(0,0,0,.22);
-  background: rgba(255,255,255,.02);
-}
-.lead-step-link.is-active{
-  border-color: rgba(154,193,255,.35);
-  box-shadow: 0 14px 30px rgba(0,0,0,.28);
-  background: linear-gradient(180deg, rgba(154,193,255,.06), rgba(18,35,66,.18));
-}
-
-/* vertical content: title → org → dates */
-.lead-step-body{ display: block; }
-.lead-role{
-  display:block;
-  font-weight: 800;
-  color:#fff;
-}
-.lead-org{
-  display:block;
-  margin-top:.25rem;
-  color: var(--ink-2);
-}
-.lead-meta{
-  display:inline-block;
-  margin-top:.4rem;
-  padding:.15rem .55rem;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.16);
-  color: var(--ink-3);
-  font-size:.9rem;
-}
-
-/* ===== Gallery: images-only, fills the column (already in place) ===== */
-.lead-gallery-wrap{
-  display:flex; flex-direction:column; height:100%;
-  background: var(--panel);
-  border: 1px solid var(--stroke);
-  border-radius: .9rem;
-  padding: 1rem;
-  box-shadow: 0 8px 26px rgba(0,0,0,.25);
-}
-.lead-gallery-header,
-.lead-gallery-hint{ display:none !important; }
-
-.lead-gallery-grid{
-  display:grid;
-  grid-template-columns: repeat(2, minmax(0,1fr));
-  gap:.6rem;
-  flex:1 1 auto; min-height:0;
-}
-@media (min-width: 1200px){
-  .lead-gallery-grid{ grid-template-columns: repeat(3, minmax(0,1fr)); }
-}
-.lead-gallery-grid a{
-  display:block; position:relative;
-  border:1px solid var(--stroke);
-  border-radius:.55rem; overflow:hidden;
-  aspect-ratio:16/10;
-}
-.lead-gallery-grid img{
-  width:100%; height:100%; object-fit:cover; display:block;
-}
-
-
-/* Fill the right column with a 2×2 edge-to-edge image grid */
-.lead-gallery-wrap{
-  background: transparent;       /* no dark tint behind images */
-  padding: 0;                    /* remove inner padding */
-  border: 1px solid var(--stroke);
-  border-radius: .9rem;
-  overflow: hidden;              /* crop to rounded corners */
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.lead-gallery-header,
-.lead-gallery-hint{ display:none !important; }
-
-.lead-gallery-grid{
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* always 2 × 2 */
-  grid-template-rows: repeat(2, 1fr);
-  gap: 0;                                /* no gutters */
-  width: 100%;
-  height: 100%;                          /* fill the card */
-  min-height: 0;
-}
-
-.lead-gallery-grid a{
-  display: block;
-  border: 0;                 /* no inner borders/lines */
-  border-radius: 0;
-  /* IMPORTANT: remove fixed aspect so cells can stretch */
-  aspect-ratio: fixed; /* reset any previous aspect-ratio */
-  position: relative;    /* for hover effect */
-}
-
-.lead-gallery-grid img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;          /* each image fully covers its cell */
-  display: block;
-}
-
-.lead-gallery-header, .lead-gallery-hint { display:none; }
-
-/* ================================
-   Leadership — Clean Final Styles
-   ================================ */
-
-/* Keep the section from clipping and give normal top/bottom rhythm */
-#leadership { min-block-size: auto; max-block-size: none; overflow: visible; }
-@supports (height: 100dvh) {
-  #leadership { min-block-size: auto; max-block-size: none; }
-}
-#leadership.page-section { padding-block: clamp(48px, 7vh, 88px); }
-
-/* Split layout: timeline (left) | gallery (right) */
-#leadership .lead-split{
-  display: grid;
-  grid-template-columns: 1fr 1fr;   /* equal columns */
-  gap: 1.25rem;
-  align-items: stretch;             /* same visual height */
+  align-items: stretch;
 }
 @media (max-width: 992px){
   #leadership .lead-split{ grid-template-columns: 1fr; }
 }
 
-/* ========================
-   Timeline (left column)
-   ======================== */
+/* Timeline */
 #leadership .lead-timeline{
-  position: relative;
-  list-style: none;
-  margin: 0;
-  padding: 0 0 0 1.6rem;    /* room for the rail & dots */
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
+  position: relative; list-style: none; margin: 0;
+  padding: 0 0 0 1.6rem; background: transparent; border: 0; box-shadow: none;
 }
 #leadership .lead-timeline::before{
-  content: "";
-  position: absolute;
-  left: .58rem;             /* centers under the dot */
-  top: 0; bottom: 0;
-  width: 2px;
-  background: rgba(255,255,255,.10);
+  content: ""; position: absolute; left: .58rem; top: 0; bottom: 0;
+  width: 2px; background: rgba(255,255,255,.10);
 }
-
-#leadership .lead-step{
-  position: relative;
-  margin: 0 0 .9rem 0;
-}
+#leadership .lead-step{ position: relative; margin: 0 0 .9rem 0; }
 #leadership .lead-step:last-child{ margin-bottom: 0; }
-
 #leadership .lead-dot{
-  position: absolute;
-  left: -1.05rem;           /* aligns with the rail */
-  top: 1.15rem;             /* dot near top of card */
+  position: absolute; left: -1.05rem; top: 1.15rem;
   width: 10px; height: 10px; border-radius: 50%;
   background: rgb(var(--brand-rgb));
   box-shadow: 0 0 0 6px rgba(var(--brand-rgb), .18);
 }
-
 #leadership .lead-step-link{
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  background: var(--panel);
-  border: 1px solid var(--stroke);
-  border-radius: .9rem;
-  padding: .85rem 1rem;
+  display: block; text-decoration: none; color: inherit;
+  background: var(--panel); border: 1px solid var(--stroke);
+  border-radius: .9rem; padding: .85rem 1rem;
   transition: border-color .12s ease, box-shadow .12s ease, background .12s ease;
 }
 #leadership .lead-step-link:hover{
@@ -692,79 +354,332 @@ hr{ border-color: var(--stroke); opacity:1; }
   box-shadow: 0 14px 30px rgba(0,0,0,.28);
   background: linear-gradient(180deg, rgba(154,193,255,.06), rgba(18,35,66,.18));
 }
-
 #leadership .lead-step-body{ display: block; }
 #leadership .lead-role{ display:block; font-weight: 800; color:#fff; }
 #leadership .lead-org{ display:block; margin-top:.25rem; color: var(--ink-2); }
 #leadership .lead-meta{
-  display:inline-block;
-  margin-top:.4rem;
-  padding:.15rem .55rem;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.16);
-  color: var(--ink-3);
-  font-size:.9rem;
+  display:inline-block; margin-top:.4rem; padding:.15rem .55rem;
+  border-radius:999px; border:1px solid rgba(255,255,255,.16);
+  color: var(--ink-3); font-size:.9rem;
 }
 
-/* ========================
-   Gallery (right column)
-   ======================== */
-
-/* Wrapper fills the column; no inner padding so images can edge-to-edge */
+/* Gallery (right) */
 #leadership .lead-gallery-wrap{
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  display: flex; flex-direction: column; height: 100%;
   background: transparent;
   border: 1px solid var(--stroke);
   border-radius: .9rem;
-  overflow: hidden;         /* crop to rounded corners */
+  overflow: clip;                /* hard clip inside the card */
   padding: 0;
+  isolation: isolate;            /* own stacking context */
   box-shadow: 0 8px 26px rgba(0,0,0,.25);
 }
-
-/* Hide optional header/hint (images only) */
+@supports not (overflow: clip){
+  #leadership .lead-gallery-wrap{ overflow: hidden; }
+}
 #leadership .lead-gallery-header,
 #leadership .lead-gallery-hint{ display:none !important; }
 
-/* Default: 2×2 image grid that fills the entire wrapper */
 #leadership #lead-gallery{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows:    repeat(2, 1fr);
-  gap: 0;                        /* no gutters for full bleed */
-  width: 100%;
-  height: 100%;
-  min-height: 0;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0; width: 100%; height: 100%; min-height: 0;
 }
 #leadership #lead-gallery a{
-  display: block;
-  border: 0;
-  border-radius: 0;
-  aspect-ratio: auto;            /* allow cells to stretch */
-  position: relative;
+  display: block; position: relative; border: 0; border-radius: 0;
+  aspect-ratio: auto; overflow: hidden;
 }
 #leadership #lead-gallery img{
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;             /* fill each cell */
+  display: block; width: 100%; height: 100%;
+  object-fit: cover;
 }
 
-/* Single-image mode: JS adds .is-single to #lead-gallery */
-#leadership #lead-gallery.is-single{
-  display: block !important;  /* cancel the grid */
+/* Ensure sections that follow stack above, even with GPU layers */
+.page-section, .section-about{ position: relative; z-index: 1; }
+#projects, #experience, #contact{ position: relative; z-index: 2; }
+
+/* --- Leadership: keep gallery away from the section boundary --- */
+
+/* More breathing room at the bottom of the section */
+#leadership.page-section{
+  padding-block: clamp(48px, 7vh, 88px) clamp(80px, 10vh, 128px);
+}
+
+/* Cap the gallery card height so it can't grow to the boundary */
+#leadership .lead-gallery-wrap{
+  max-height: clamp(360px, 58vh, 640px);
+  box-shadow: 0 6px 18px rgba(0,0,0,.22); /* slightly softer so it doesn't 'cross' the color line */
+}
+
+/* Make the grid respect the cap */
+#leadership #lead-gallery{ height: 100%; }
+#leadership #lead-gallery a{ overflow: hidden; }
+#leadership #lead-gallery img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- Leadership: clip the left timeline rail so it can't extend past the section --- */
+#leadership .lead-timeline{
+  position: relative;
+  overflow: clip;        /* hard visual clip for the pseudo-element rail */
+  contain: paint;        /* isolate painting to this box */
+}
+@supports not (overflow: clip){
+  #leadership .lead-timeline{ overflow: hidden; } /* fallback */
+}
+
+/* make sure the rail itself doesn't create weird stacking */
+#leadership .lead-timeline::before{
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* optional: small bottom buffer so the rail never visually touches the section boundary */
+#leadership .lead-timeline{ padding-bottom: 8px; }
+
+/* --- Leadership: replace continuous rail with per-item segments --- */
+
+/* Kill the full-height rail */
+#leadership .lead-timeline::before{
+  content: none !important;
+}
+
+/* Draw a segment under each dot, bounded by the card itself */
+#leadership .lead-step{
+  position: relative;
+  overflow: visible; /* ensure the segment is contained by the card’s block */
+}
+
+/* segment from the dot downward to the next item gap */
+#leadership .lead-step::after{
+  content: "";
+  position: absolute;
+  left: -0.47rem;            /* aligns under the dot; adjust +/- 1–2px if needed */
+  top: 1.15rem;              /* starts at the dot’s center */
+  bottom: -0.85rem;          /* extends a bit into the gap to visually connect */
+  width: 2px;
+  background: rgba(255,255,255,.10);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Do NOT draw a segment for the last item */
+#leadership .lead-step:last-child::after{
+  content: none;
+}
+
+/* Keep the dot above the segment */
+#leadership .lead-dot{ z-index: 1; }
+
+/* Keep the timeline column clipped/isolated just in case */
+#leadership .lead-timeline{
+  overflow: clip;
+  contain: paint;
+}
+@supports not (overflow: clip){
+  #leadership .lead-timeline{ overflow: hidden; }
+}
+
+/* --- Leadership: single-image mode (full-bleed) --- */
+
+/* CSS-only detection: if the gallery has exactly one <a> child */
+#leadership .lead-gallery-wrap:has(#lead-gallery > a:first-child:last-child) #lead-gallery{
+  display: block;            /* cancel the grid */
   width: 100%;
   height: 100%;
 }
-#leadership #lead-gallery.is-single a{
+
+#leadership .lead-gallery-wrap:has(#lead-gallery > a:first-child:last-child) #lead-gallery > a{
   display: block;
   width: 100%;
   height: 100%;
+  border-radius: 0;
+}
+#leadership .lead-gallery-wrap:has(#lead-gallery > a:first-child:last-child) #lead-gallery img{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;          /* full-bleed cover */
+}
+
+/* Fallback if you toggle a class via JS: <div id="lead-gallery" class="is-single"> */
+#leadership #lead-gallery.is-single{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+#leadership #lead-gallery.is-single > a{
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
 }
 #leadership #lead-gallery.is-single img{
-  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;           /* full-bleed cover */
+  object-fit: cover;
 }
+
+/* -------- Projects: clean grid section -------- */
+
+#projects{
+  position: relative;
+  z-index: 2;                /* sits above leadership; keeps stacking sane */
+  overflow: clip;            /* no horizontal bleed from cards */
+}
+@supports not (overflow: clip){
+  #projects{ overflow: hidden; }
+}
+
+/* Title pinned visually to the top of the section */
+#projects .proj-head{
+  position: relative;        /* not sticky, just top of flow */
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+#projects .title{
+  margin: 0;                 /* ensure no unexpected push-down */
+}
+
+/* Responsive grid: tidy, no overflow; scales from 320px columns up */
+.projects-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.1rem;
+  align-items: stretch;
+}
+
+/* Card polish specific to projects in a grid context */
+#projects .project-card{
+  display: flex;
+  flex-direction: column;
+  min-height: 0;             /* prevents flex overflow */
+  padding: 1.1rem 1.2rem;
+  border-left-width: 3px;    /* a hair lighter than other sections */
+}
+#projects .project-card header h5{
+  font-size: 1.05rem;
+  margin: 0;
+}
+#projects .project-card .project-spec{
+  padding-left: 1.1rem;
+  margin-bottom: .75rem;
+}
+#projects .project-card .project-tags{
+  margin-top: auto;          /* tags & buttons sit toward bottom */
+}
+#projects .project-card .btn{
+  border-radius: .6rem;
+  padding: .35rem .7rem;
+}
+
+/* Subtle hover elevation; no translate that could bleed over section */
+#projects .project-card:hover{
+  box-shadow: 0 12px 28px rgba(0,0,0,.32);
+}
+
+/* Keep the section visually contained on ultrawide screens */
+@media (min-width: 1400px){
+  #projects .container{ max-width: 1200px; }
+}
+
+#leadership.page-section{
+  padding-block: clamp(36px, 5vh, 64px) clamp(24px, 4vh, 48px) !important;
+}
+
+
+/* Vertically center the Projects section content */
+#projects.page-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* center vertically */
+  align-items: center;     /* center horizontally */
+  min-height: 100svh;      /* take full viewport height */
+  padding: 0;              /* remove large top/bottom padding */
+  margin-top: 0;
+  padding-top: 60px;
+}
+
+/* Keep title spacing neat */
+#projects .proj-head {
+  margin-bottom: 2rem; /* space between title and cards */
+  text-align: center;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* Keep cards in a nice grid */
+#projects .projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1200px; /* limit width so it's not too wide */
+}
+
+/* --- Projects: start right under the navbar, no extra vertical gap --- */
+
+/* Let Projects size to its content (not forced to full-screen) */
+#projects.snap{
+  min-height: auto !important;
+}
+
+/* Place the content directly below the fixed nav and keep a modest bottom pad */
+#projects.page-section{
+  padding-block: calc(var(--nav-h) + 8px) 56px !important;
+  margin: 0 !important;
+  display: block !important;         /* cancel previous flex-centering */
+}
+
+/* Tighten the header spacing */
+#projects .proj-head{
+  margin: 0 0 14px 0 !important;
+  padding: 0 !important;
+  text-align: center;
+}
+#projects .title{ margin: 0 !important; }
+
+/* Grid stays the same (just ensuring no accidental extra height) */
+#projects .projects-grid{
+  min-height: 0;
+}
+
+/* --- Projects: own background + exact viewport height --- */
+
+/* Paint the Projects section itself (don't let next section's color show through) */
+#projects {
+  position: relative;
+  isolation: isolate;                             /* own stacking/paint context */
+  background:
+    var(--dot),                                   /* same texture as <body> */
+    radial-gradient(1200px 800px at 20% -10%, #15243f 0%, transparent 60%),
+    linear-gradient(180deg, #0b1220 0%, #0b1220 100%);
+  background-size: var(--dot-size), auto, auto;
+  background-color: var(--bg-0);
+}
+
+/* Cancel the global full-screen rule for .snap on this section */
+#projects.snap { min-height: auto !important; }
+
+/* Fill the visible viewport minus the fixed nav, and keep a safe bottom cushion */
+#projects.page-section{
+  min-block-size: calc(100dvh - var(--nav-h)) !important;  /* use dvh for reliable sizing */
+  box-sizing: border-box;
+  padding-block: calc(var(--nav-h) + 8px) 72px !important;  /* title under nav + bottom space */
+  margin: 0 !important;
+  overflow: hidden;                                        /* hide card shadows at the edge */
+}
+
+/* Tight header */
+#projects .proj-head{ margin: 0 0 14px 0 !important; padding: 0 !important; text-align:center; }
+#projects .title{ margin: 0 !important; }
+
+/* Defensive: no accidental extra height from the grid */
+#projects .projects-grid{ min-height: 0; }
+
+/* Make sure the next section doesn't pull upward with margins */
+#experience.page-section,
+#contact.page-section { margin-top: 0 !important; }
