@@ -261,3 +261,4 @@ window.addEventListener('DOMContentLoaded', event => {
   if (links[0]) renderGallery(links[0]);
   sizeSplit();
 })();
+
