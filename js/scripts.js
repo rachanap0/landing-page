@@ -77,10 +77,50 @@ window.addEventListener('DOMContentLoaded', event => {
   }
 
   // trigger when the strip scrolls into view
-  const section = document.getElementById('stats');
-  if (!section) return;
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { els.forEach(animate); io.disconnect(); } });
-  }, { threshold: 0.3 });
-  io.observe(section);
+// trigger when the about KPIs scroll into view
+    const section = document.getElementById('about-stats');
+    if (!section) return;
+    const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) { els.forEach(animate); io.disconnect(); }
+    });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    io.observe(section);
+
+})();
+
+// Reveal-on-scroll for snap sections
+(function () {
+  const panels = document.querySelectorAll('.snap');
+  if (!panels.length) return;
+
+  // mark panels as revealable (CSS looks for [data-reveal])
+  panels.forEach(el => el.setAttribute('data-reveal', ''));
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        // unobserve once revealed to avoid re-triggering
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+
+  panels.forEach((el) => io.observe(el));
+})();
+
+
+// at end of js/scripts.js
+(function () {
+  function setNavHeight() {
+    const nav = document.getElementById('mainNav');
+    const h = (nav && nav.offsetHeight) ? nav.offsetHeight : 64;
+    const root = document.documentElement.style;
+    root.setProperty('--nav-h', h + 'px');
+    root.setProperty('--stats-pull-up', h + 'px');
+  }
+  window.addEventListener('load', setNavHeight);
+  window.addEventListener('resize', setNavHeight);
+  document.addEventListener('scroll', setNavHeight, { passive: true });
 })();
