@@ -1,7 +1,3 @@
-/* -------------------------------
-   Rachana Portfolio — Data Theme
-   Drop-in replacement for css/styles.css
--------------------------------- */
 
 /* ========== Design Tokens ========== */
 /* ========== Design Tokens ========== */
@@ -29,17 +25,24 @@
   /* hero */
   --hero-image: url("../assets/img/masthead.jpg"); /* <— adjust path if needed */
   --hero-dark: .60;                                 /* opacity knob (0–1) */
+
+  --nav-h: 64px;          /* will be updated by JS */
+  --stats-pull-up: 64px;  /* how much the strip “hangs” upward */
+
 }
+html { scroll-padding-top: var(--nav-h); }
 /* Hero background + overlay */
 .masthead{
-  position: relative;
   background-image: var(--hero-image);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 100vh;
 }
-
+@supports (height: 100dvh){
+  .masthead{ min-height: 100dvh; }  /* dynamic viewport when available */
+}
+.masthead{ position: relative; z-index: 5; }
 /* Darken the photo so the headline pops */
 .masthead::before{
   content: "";
@@ -167,6 +170,8 @@ a:hover{ color:#ffffff; }
 .btn-outline-light:hover{ background:#fff; color:#0b1220; }
 
 /* ========== KPI / Stats Strip ========== */
+
+
 .stats-strip{
   padding: 1.1rem 0;
   background-image:
@@ -177,14 +182,33 @@ a:hover{ color:#ffffff; }
   border-top: 1px solid var(--stroke);
   border-bottom: 1px solid var(--stroke);
 }
+
+/* Full-width stats strip, docked to the top edge of About */
+.stats-strip.stats-docked{
+  z-index: 2;
+  position: absolute;
+  border-top: 0;
+  left: 0; right: 0;
+  top: calc(var(--nav-h) - var(--stats-pull-up));  /* <<< key line */
+}
+/* Stats cells (reuse your previous look) */
 .stat{ margin:.3rem 0; }
 .stat-number{
   font-family: "Merriweather", Georgia, serif;
   font-weight: 800; font-size: 2rem; line-height:1;
   letter-spacing:.5px; font-variant-numeric: tabular-nums;
+  color:#e7ecf5;
 }
 .stat-label{ color: var(--ink-3); }
 
+@media (max-width: 768px){
+  .stats-strip.stats-docked{ top: -32px; }
+}
+
+/* Tweak on small screens: hang a bit less */
+@media (max-width: 768px){
+  :root{ --stats-pull-up: 32px; }
+}
 /* ========== Card System (Projects, Experience, Foundations, Leadership) ========== */
 .card-like{
   background: var(--panel);
@@ -338,6 +362,173 @@ a:hover{ color:#ffffff; }
 }
 .link-muted:hover{ color:#cfe2ff; border-color:#cfe2ff; }
 
+
+/* About becomes the positioning context */
+.section-about{
+  position: relative;
+  /* add top space so the title doesn't collide with the docked strip */
+  padding: clamp(84px, 12vh, 140px) 0 0;
+  background: radial-gradient(1200px 600px at 50% -200px, rgba(77,130,255,0.08), transparent 60%);
+}
+
+/* Centered inner wrap */
+.section-about .about-wrap{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+
+/* Title */
+.section-about .title {
+  font-size: clamp(28px, 3.2vw, 40px);
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+/* Underline accent */
+.section-about .title::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 3px;
+  margin: 14px auto 0;
+  background: linear-gradient(90deg, var(--blue-400, #4d82ff), var(--blue-300, #6aa2ff));
+  border-radius: 999px;
+  opacity: 0.9;
+}
+
+/* Floating KPIs */
+.section-about .about-stats {
+  position: absolute;
+  top: -50px; /* pulls it upward to overlap hero */
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 12px;
+  max-width: 900px;
+  width: calc(100% - 40px);
+  z-index: 2;
+}
+.section-about .kpi {
+  background: var(--panel);
+  border: 1px solid var(--stroke);
+  border-radius: 12px;
+  padding: 14px 16px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,.20);
+}
+
+.section-about .kpi-num {
+  font-family: "Merriweather", Georgia, serif;
+  font-weight: 800;
+  font-size: clamp(20px, 2.4vw, 28px);
+  line-height: 1;
+  letter-spacing: .3px;
+  color: #fff;
+}
+
+.section-about .kpi-label {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: var(--ink-3);
+}
+
+@media (max-width: 992px) {
+  .section-about .about-stats {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+}
+@media (max-width: 520px) {
+  .section-about .about-stats {
+    grid-template-columns: 1fr;
+    top: -40px;
+  }
+}
+
+/* Body */
+.section-about .lead {
+  max-width: 900px;         /* reduce line-length */
+  margin: 18px auto 0;      /* slightly smaller since KPIs are above */
+  font-size: clamp(16px, 1.35vw, 20px);
+  line-height: 1.75;
+  color: rgba(255,255,255,0.85);
+  text-align: left;          /* left-align improves readability */
+}
+
+/* Emphasis inside text */
+.section-about .lead b, 
+.section-about .lead strong {
+  color: #fff;               /* slightly brighter than body */
+}
+
+/* Highlights (chips) */
+.section-about .highlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 12px;
+  max-width: 900px;
+  margin: 14px auto 0;
+}
+.highlight {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.10);
+  font-size: 14px;
+  line-height: 1.45;
+  color: rgba(255,255,255,0.86);
+  text-align: center;
+}
+
+/* Actions */
+.section-about .actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+/* Primary button */
+.btn-primary {
+  padding: 14px 22px;
+  font-weight: 700;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #4d82ff, #326cff);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 6px 16px rgba(77,130,255,0.26);
+  transition: transform .06s ease, box-shadow .2s ease, background .2s ease;
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 22px rgba(77,130,255,0.32); }
+
+/* Secondary (ghost) */
+.btn-ghost {
+  padding: 14px 22px;
+  font-weight: 600;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.16);
+  color: rgba(255,255,255,0.9);
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.28); }
+
+/* Responsive tweaks */
+@media (max-width: 992px){
+  .section-about .about-stats{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 720px) {
+  .section-about .highlights { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px){
+  .section-about .about-stats{ grid-template-columns: 1fr; }
+}
+
+
+
 /* ========== Utilities ========== */
 .text-white-75{ color: rgba(255,255,255,.85) !important; }
 .small{ font-size:.95rem; }
@@ -353,3 +544,109 @@ hr{ border-color: var(--stroke); opacity:1; }
 
 /* Optional: if your theme script adds .navbar-shrink on scroll keep this too */
 .navbar-shrink{ background: rgba(10,16,28,.65) !important; backdrop-filter: blur(6px); }
+
+
+/* ===== Scroll Snap (page-level) ===== */
+html, body { height: 100%; }
+html {
+  /* gentle “magnetic” snap; use 'mandatory' for stronger */
+  scroll-snap-type: y proximity;
+  /* your navbar is fixed-top; ~72px tall */
+  scroll-padding-top: 72px;
+}
+
+/* Only sections marked .snap will snap and fill the viewport nicely */
+.snap {
+  scroll-snap-align: start;
+  min-height: 100svh;     /* use small viewport units for iOS address bar */
+  display: flex;
+  align-items: center;     /* vertical center content within the panel */
+  padding-block: clamp(64px, 10vh, 120px);
+}
+
+/* Don’t let any wrapper kill scrolling */
+body, main { overflow: visible; }
+
+/* ===== Reveal-on-scroll (nice fade/slide in) ===== */
+.snap[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .6s ease, transform .6s ease;
+  will-change: opacity, transform;
+}
+.snap.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .snap { min-height: auto; }
+  .snap[data-reveal] { opacity: 1; transform: none; transition: none; }
+}
+
+/* Inline KPIs inside About */
+.about-stats{
+  display:grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 12px;
+  max-width: 900px;
+  margin: 18px auto 8px;
+}
+
+.kpi{
+  background: var(--panel);
+  border: 1px solid var(--stroke);
+  border-radius: 12px;
+  padding: 14px 16px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,.20);
+}
+
+.kpi-num{
+  font-family: "Merriweather", Georgia, serif;
+  font-weight: 800;
+  font-size: clamp(20px, 2.4vw, 28px);
+  line-height: 1;
+  letter-spacing: .3px;
+  color: #fff;
+}
+
+.kpi-label{
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: var(--ink-3);
+}
+
+@media (max-width: 992px){
+  .about-stats{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 520px){
+  .about-stats{ grid-template-columns: 1fr; }
+}
+
+.section-about { padding: clamp(36px, 6vw, 80px) 0; }
+
+/* === STOP the stats strip from showing on the hero === */
+
+/* 1) Make the hero truly full-viewport (override the 92vh rule) */
+body { margin: 0; } /* just in case */
+.masthead { min-height: 100svh !important; }
+@supports (height: 100dvh){
+  .masthead { min-height: 100dvh !important; }
+}
+
+/* 2) Dock the stats to the exact top of About (no upward nudge) */
+.stats-strip.stats-docked{
+  top: 0 !important;         /* ensure we’re not pulling it upward */
+  z-index: 2;                /* stays below the hero */
+  border-top: 0;             /* no seam under the nav/hero */
+}
+
+/* 3) About provides space for title below the strip */
+:root{ --nav-h: 64px; }      /* JS will update this; default is fine */
+.section-about{
+  position: relative;
+  padding-top: calc(var(--nav-h) + 56px);
+}
