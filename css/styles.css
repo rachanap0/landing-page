@@ -346,3 +346,425 @@ hr{ border-color: var(--stroke); opacity:1; }
   .snap{ min-height: auto; }
   .snap[data-reveal]{ opacity:1; transform:none; transition:none; }
 }
+
+
+/* ===== Leadership split layout ===== */
+.lead-split{
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;  /* timeline | gallery */
+  gap: 1.25rem;
+  align-items: start;
+}
+@media (max-width: 992px){
+  .lead-split{ grid-template-columns: 1fr; }
+}
+
+/* Timeline (left) */
+.lead-timeline{
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 1.25rem;
+}
+.lead-timeline::before{
+  content: "";
+  position: absolute; left: .5rem; top: .2rem; bottom: .2rem;
+  width: 2px; background: rgba(255,255,255,.10);
+}
+.lead-step{ position: relative; margin: 0 0 .9rem 0; padding-left: .75rem; }
+.lead-dot{
+  position: absolute; left: -1.05rem; top: .55rem;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: rgb(var(--brand-rgb)); box-shadow: 0 0 0 6px rgba(var(--brand-rgb), .18);
+}
+.lead-step-link{
+  display: block; text-decoration: none; color: inherit;
+  background: var(--panel); border: 1px solid var(--stroke);
+  border-radius: .9rem; padding: .7rem .9rem;
+  transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease, background .12s ease;
+}
+.lead-step-link:hover{
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,.14);
+  box-shadow: 0 12px 28px rgba(0,0,0,.28);
+}
+.lead-step-link.is-active{
+  border-color: rgba(154,193,255,.35);
+  box-shadow: 0 14px 30px rgba(0,0,0,.32);
+  background: linear-gradient(180deg, rgba(154,193,255,.06), rgba(18,35,66,.2));
+}
+.lead-step-body{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: .2rem .75rem;
+  align-items: baseline;
+}
+.lead-role{ font-weight: 800; color: #fff; }
+.lead-org { color: var(--ink-2); }
+.lead-meta{ color: var(--ink-3); }
+
+/* Gallery (right) */
+.lead-gallery-wrap{
+  background: var(--panel);
+  border: 1px solid var(--stroke);
+  border-radius: .9rem;
+  padding: 0.9rem 1rem 1rem;
+  box-shadow: 0 8px 26px rgba(0,0,0,.25);
+}
+.lead-gallery-header{
+  margin: 0 0 .5rem 0;
+  color: var(--ink-3);
+}
+.lead-gallery-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: .6rem;
+}
+@media (min-width: 1200px){
+  .lead-gallery-grid{ grid-template-columns: repeat(3, minmax(0,1fr)); }
+}
+.lead-gallery-grid a{
+  display: block;
+  border-radius: .55rem;
+  overflow: hidden;
+  border: 1px solid var(--stroke);
+  position: relative;
+}
+.lead-gallery-grid img{
+  width: 100%; height: 180px; object-fit: cover; display: block;
+}
+.lead-gallery-grid a::after{
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent, rgba(0,0,0,.15));
+  opacity: 0; transition: opacity .15s ease;
+}
+.lead-gallery-grid a:hover::after{ opacity: 1; }
+
+.lead-gallery-hint{ margin-top: .5rem; color: var(--ink-3); }
+
+
+/* ===== Leadership split stays 1fr | 1fr (equal columns) ===== */
+.lead-split{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  align-items: stretch;     /* both columns same height */
+}
+@media (max-width: 992px){
+  .lead-split{ grid-template-columns: 1fr; }
+}
+
+/* ===== Timeline: remove big card; keep the rail ===== */
+.lead-timeline{
+  position: relative;
+  margin: 0;
+  padding: 0 0 0 1.6rem;    /* room for the rail & dots */
+  list-style: none;
+
+  /* kill the large card look */
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.lead-timeline::before{
+  content: "";
+  position: absolute;
+  left: .58rem;             /* centers under the dot */
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(255,255,255,.10);
+}
+
+/* each step is its own card */
+.lead-step{
+  position: relative;
+  margin: 0 0 .9rem 0;
+}
+.lead-step:last-child{ margin-bottom: 0; }
+
+.lead-dot{
+  position: absolute;
+  left: -1.05rem;           /* aligns with the rail */
+  top: 1.15rem;             /* dot near top of card */
+  width: 10px; height: 10px; border-radius: 50%;
+  background: rgb(var(--brand-rgb));
+  box-shadow: 0 0 0 6px rgba(var(--brand-rgb), .18);
+}
+
+/* card for each item — vertical stack so TITLE is at top */
+.lead-step-link{
+  display: block;
+  text-decoration: none;
+  color: inherit;
+
+  background: var(--panel);
+  border: 1px solid var(--stroke);
+  border-radius: .9rem;
+  padding: .85rem 1rem;
+
+  transition: border-color .12s ease, box-shadow .12s ease, background .12s ease;
+}
+.lead-step-link:hover{
+  border-color: rgba(255,255,255,.14);
+  box-shadow: 0 10px 22px rgba(0,0,0,.22);
+  background: rgba(255,255,255,.02);
+}
+.lead-step-link.is-active{
+  border-color: rgba(154,193,255,.35);
+  box-shadow: 0 14px 30px rgba(0,0,0,.28);
+  background: linear-gradient(180deg, rgba(154,193,255,.06), rgba(18,35,66,.18));
+}
+
+/* vertical content: title → org → dates */
+.lead-step-body{ display: block; }
+.lead-role{
+  display:block;
+  font-weight: 800;
+  color:#fff;
+}
+.lead-org{
+  display:block;
+  margin-top:.25rem;
+  color: var(--ink-2);
+}
+.lead-meta{
+  display:inline-block;
+  margin-top:.4rem;
+  padding:.15rem .55rem;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.16);
+  color: var(--ink-3);
+  font-size:.9rem;
+}
+
+/* ===== Gallery: images-only, fills the column (already in place) ===== */
+.lead-gallery-wrap{
+  display:flex; flex-direction:column; height:100%;
+  background: var(--panel);
+  border: 1px solid var(--stroke);
+  border-radius: .9rem;
+  padding: 1rem;
+  box-shadow: 0 8px 26px rgba(0,0,0,.25);
+}
+.lead-gallery-header,
+.lead-gallery-hint{ display:none !important; }
+
+.lead-gallery-grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap:.6rem;
+  flex:1 1 auto; min-height:0;
+}
+@media (min-width: 1200px){
+  .lead-gallery-grid{ grid-template-columns: repeat(3, minmax(0,1fr)); }
+}
+.lead-gallery-grid a{
+  display:block; position:relative;
+  border:1px solid var(--stroke);
+  border-radius:.55rem; overflow:hidden;
+  aspect-ratio:16/10;
+}
+.lead-gallery-grid img{
+  width:100%; height:100%; object-fit:cover; display:block;
+}
+
+
+/* Fill the right column with a 2×2 edge-to-edge image grid */
+.lead-gallery-wrap{
+  background: transparent;       /* no dark tint behind images */
+  padding: 0;                    /* remove inner padding */
+  border: 1px solid var(--stroke);
+  border-radius: .9rem;
+  overflow: hidden;              /* crop to rounded corners */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.lead-gallery-header,
+.lead-gallery-hint{ display:none !important; }
+
+.lead-gallery-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* always 2 × 2 */
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0;                                /* no gutters */
+  width: 100%;
+  height: 100%;                          /* fill the card */
+  min-height: 0;
+}
+
+.lead-gallery-grid a{
+  display: block;
+  border: 0;                 /* no inner borders/lines */
+  border-radius: 0;
+  /* IMPORTANT: remove fixed aspect so cells can stretch */
+  aspect-ratio: fixed; /* reset any previous aspect-ratio */
+  position: relative;    /* for hover effect */
+}
+
+.lead-gallery-grid img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;          /* each image fully covers its cell */
+  display: block;
+}
+
+.lead-gallery-header, .lead-gallery-hint { display:none; }
+
+/* ================================
+   Leadership — Clean Final Styles
+   ================================ */
+
+/* Keep the section from clipping and give normal top/bottom rhythm */
+#leadership { min-block-size: auto; max-block-size: none; overflow: visible; }
+@supports (height: 100dvh) {
+  #leadership { min-block-size: auto; max-block-size: none; }
+}
+#leadership.page-section { padding-block: clamp(48px, 7vh, 88px); }
+
+/* Split layout: timeline (left) | gallery (right) */
+#leadership .lead-split{
+  display: grid;
+  grid-template-columns: 1fr 1fr;   /* equal columns */
+  gap: 1.25rem;
+  align-items: stretch;             /* same visual height */
+}
+@media (max-width: 992px){
+  #leadership .lead-split{ grid-template-columns: 1fr; }
+}
+
+/* ========================
+   Timeline (left column)
+   ======================== */
+#leadership .lead-timeline{
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 1.6rem;    /* room for the rail & dots */
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+#leadership .lead-timeline::before{
+  content: "";
+  position: absolute;
+  left: .58rem;             /* centers under the dot */
+  top: 0; bottom: 0;
+  width: 2px;
+  background: rgba(255,255,255,.10);
+}
+
+#leadership .lead-step{
+  position: relative;
+  margin: 0 0 .9rem 0;
+}
+#leadership .lead-step:last-child{ margin-bottom: 0; }
+
+#leadership .lead-dot{
+  position: absolute;
+  left: -1.05rem;           /* aligns with the rail */
+  top: 1.15rem;             /* dot near top of card */
+  width: 10px; height: 10px; border-radius: 50%;
+  background: rgb(var(--brand-rgb));
+  box-shadow: 0 0 0 6px rgba(var(--brand-rgb), .18);
+}
+
+#leadership .lead-step-link{
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background: var(--panel);
+  border: 1px solid var(--stroke);
+  border-radius: .9rem;
+  padding: .85rem 1rem;
+  transition: border-color .12s ease, box-shadow .12s ease, background .12s ease;
+}
+#leadership .lead-step-link:hover{
+  border-color: rgba(255,255,255,.14);
+  box-shadow: 0 10px 22px rgba(0,0,0,.22);
+  background: rgba(255,255,255,.02);
+}
+#leadership .lead-step-link.is-active{
+  border-color: rgba(154,193,255,.35);
+  box-shadow: 0 14px 30px rgba(0,0,0,.28);
+  background: linear-gradient(180deg, rgba(154,193,255,.06), rgba(18,35,66,.18));
+}
+
+#leadership .lead-step-body{ display: block; }
+#leadership .lead-role{ display:block; font-weight: 800; color:#fff; }
+#leadership .lead-org{ display:block; margin-top:.25rem; color: var(--ink-2); }
+#leadership .lead-meta{
+  display:inline-block;
+  margin-top:.4rem;
+  padding:.15rem .55rem;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.16);
+  color: var(--ink-3);
+  font-size:.9rem;
+}
+
+/* ========================
+   Gallery (right column)
+   ======================== */
+
+/* Wrapper fills the column; no inner padding so images can edge-to-edge */
+#leadership .lead-gallery-wrap{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: transparent;
+  border: 1px solid var(--stroke);
+  border-radius: .9rem;
+  overflow: hidden;         /* crop to rounded corners */
+  padding: 0;
+  box-shadow: 0 8px 26px rgba(0,0,0,.25);
+}
+
+/* Hide optional header/hint (images only) */
+#leadership .lead-gallery-header,
+#leadership .lead-gallery-hint{ display:none !important; }
+
+/* Default: 2×2 image grid that fills the entire wrapper */
+#leadership #lead-gallery{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows:    repeat(2, 1fr);
+  gap: 0;                        /* no gutters for full bleed */
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+#leadership #lead-gallery a{
+  display: block;
+  border: 0;
+  border-radius: 0;
+  aspect-ratio: auto;            /* allow cells to stretch */
+  position: relative;
+}
+#leadership #lead-gallery img{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;             /* fill each cell */
+}
+
+/* Single-image mode: JS adds .is-single to #lead-gallery */
+#leadership #lead-gallery.is-single{
+  display: block !important;  /* cancel the grid */
+  width: 100%;
+  height: 100%;
+}
+#leadership #lead-gallery.is-single a{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+#leadership #lead-gallery.is-single img{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;           /* full-bleed cover */
+}

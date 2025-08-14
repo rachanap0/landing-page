@@ -213,116 +213,121 @@
     </section>
 
     <!-- Leadership & Community -->
-    <section class="snap page-section" id="leadership">
+    <!-- Leadership & Community -->
+    <!-- Leadership & Involvement -->
+    <section class="page-section snap" id="leadership">
       <div class="container px-4 px-lg-5">
-        <h2 class="text-center mb-2">Leadership &amp; Community</h2>
+        <h2 class="text-center mb-2">Leadership &amp; Involvement</h2>
         <hr class="divider mb-4" />
 
-        <div class="lead-grid">
-          <a class="lead-card" href="#experience">
-            <div class="lead-icon"><i class="bi bi-book"></i></div>
-            <div class="lead-title">President</div>
-            <div class="lead-meta">Nepalese Students Association · UTA</div>
-          </a>
+        <div class="lead-split">
+          <!-- LEFT: Timeline -->
+          <ol class="lead-timeline" id="lead-timeline">
+            <!-- 1 -->
+            <li class="lead-step">
+              <a
+                class="lead-step-link is-active"
+                href="#leadership"
+                aria-current="true"
+                data-label="President — Nepalese Students Association · UTA"
+                data-gallery='[
+                  {"href":"assets/img/nsa1.jpg","thumb":"assets/img/nsa1.jpg"},
+                  {"href":"assets/img/nsa2.jpg","thumb":"assets/img/nsa2.jpg"},
+                  {"href":"assets/img/nsa3.jpeg","thumb":"assets/img/nsa3.jpeg"},
+                  {"href":"assets/img/nsa4.JPG","thumb":"assets/img/nsa4.JPG"}
+                ]'
+              >
+                <span class="lead-dot"></span>
+                <span class="lead-step-body">
+                  <span class="lead-role">President</span>
+                  <span class="lead-org">Nepalese Students Association · UTA</span>
+                  <span class="lead-meta">2024–2025</span>
+                </span>
+              </a>
+            </li>
 
-          <a class="lead-card" href="#projects">
-            <div class="lead-icon"><i class="bi bi-laptop"></i></div>
-            <div class="lead-title">Engineering Fellow</div>
-            <div class="lead-meta">Headstarter AI · 7-week program</div>
-          </a>
+            <!-- 2 -->
+            <li class="lead-step">
+              <a
+                class="lead-step-link"
+                href="#"
+                data-gallery='[
+                  {"href":"assets/img/headstarter.jpeg","src":"assets/img/headstarter.jpeg"}
+                ]'
+              >
+                <span class="lead-dot"></span>
+                <span class="lead-step-body">
+                  <span class="lead-role">Engineering Fellow</span>
+                  <span class="lead-org">Headstarter AI · 7-week program</span>
+                  <span class="lead-meta">2024</span>
+                </span>
+              </a>
+            </li>
 
-          <a
-            class="lead-card"
-            href="https://naesc.org"
-            target="_blank"
-            rel="noopener"
-          >
-            <div class="lead-icon"><i class="bi bi-globe"></i></div>
-            <div class="lead-title">NAESC Coordinator</div>
-            <div class="lead-meta">Central Region Comms Coordinator</div>
-          </a>
+            <!-- 3 -->
+            <li class="lead-step">
+                <a
+                class="lead-step-link"
+                href="#leadership"
+                data-label="Communications Coordinator — National Association of Engineering Students’ Council · UTA"
+                data-gallery='[
+                  {"href":"assets/img/naesc1.jpg","thumb":"assets/img/naesc1.jpg"},
+                  {"href":"assets/img/naesc2.jpg","thumb":"assets/img/naesc2.jpg"},
+                  {"href":"assets/img/naesc3.jpg","thumb":"assets/img/naesc3.jpg"},
+                  {"href":"assets/img/naesc4.jpg","thumb":"assets/img/naesc4.jpg"}
+                ]'
+              >
+                <span class="lead-dot"></span>
+                <span class="lead-step-body">
+                  <span class="lead-role">NAESC Coordinator</span>
+                  <span class="lead-org">Central Region Communications</span>
+                  <span class="lead-meta">2023–2024</span>
+                </span>
+              </a>
+            </li>
 
-          <a class="lead-card" href="#experience">
-            <div class="lead-icon"><i class="bi bi-star"></i></div>
-            <div class="lead-title">Vice-President</div>
-            <div class="lead-meta">Engineering Students’ Council · UTA</div>
-          </a>
-        </div>
+            <!-- 4 -->
+            <li class="lead-step">
+              <a
+                class="lead-step-link"
+                href="#leadership"
+                data-label="Vice-President — Engineering Students’ Council · UTA"
+                data-gallery='[
+                  {"href":"assets/img/esc1.JPG","thumb":"assets/img/esc1.JPG"},
+                  {"href":"assets/img/esc13.JPG","thumb":"assets/img/esc13.JPG"},
+                  {"href":"assets/img/esc6.jpg","thumb":"assets/img/esc6.jpg"},
+                  {"href":"assets/img/esc2.jpg","thumb":"assets/img/esc2.jpg"}
+                ]'
+              >
+                <span class="lead-dot"></span>
+                <span class="lead-step-body">
+                  <span class="lead-role">Vice-President</span>
+                  <span class="lead-org">Engineering Students’ Council · UTA</span>
+                  <span class="lead-meta">2023–2024</span>
+                </span>
+              </a>
+            </li>
+          </ol>
 
-        <div class="text-center mt-3">
-          <a class="link-muted" href="#experience"
-            >See details in Experience →</a
-          >
+          
+
+          <!-- RIGHT: Reactive gallery -->
+          <div class="lead-gallery-wrap">
+            <div class="lead-gallery-header small text-muted" id="lead-gallery-title">
+              <!-- JS fills with current label -->
+            </div>
+            <div class="lead-gallery-grid" id="lead-gallery">
+              <!-- JS populates thumbnails/links -->
+            </div>
+            <div class="lead-gallery-hint small text-muted">Click any image to open</div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Foundations & Learning Journey -->
-    <section class="snap page-section" id="foundations">
-      <div class="container px-4 px-lg-5">
-        <div class="row justify-content-center">
-          <div class="col-lg-10">
-            <h2 class="text-center mb-2">Foundations &amp; Learning Journey</h2>
-            <hr class="divider mb-4" />
-          </div>
-        </div>
 
-        <!-- Top row: Toolkit + Journey -->
-        <div class="row g-4 foundations-row">
-          <!-- Toolkit -->
-          <div class="col-lg-6 d-flex">
-            <div class="foundation-card h-100">
-              <h5 class="mb-2">Toolkit</h5>
-              <p class="text-muted small mb-3">
-                What I use day-to-day in projects.
-              </p>
 
-              <ul class="tool-list">
-                <li>
-                  <span class="tool">SQL</span>
-                  <span class="level-chip good">Comfortable</span>
-                  <span class="desc"
-                    >joins • window functions • CTEs • metrics</span
-                  >
-                </li>
-                <li>
-                  <span class="tool">Python</span>
-                  <span class="level-chip good">Comfortable</span>
-                  <span class="desc"
-                    >pandas • numpy • matplotlib • seaborn</span
-                  >
-                </li>
-                <li>
-                  <span class="tool">Experimentation</span>
-                  <span class="level-chip growing">Growing</span>
-                  <span class="desc"
-                    >A/B tests • power checks • CUPED basics</span
-                  >
-                </li>
-                <li>
-                  <span class="tool">Visualization</span>
-                  <span class="level-chip good">Comfortable</span>
-                  <span class="desc"
-                    >dashboards &amp; clear charts for decisions</span
-                  >
-                </li>
-              </ul>
-
-              <h6 class="mt-4 mb-2">Currently learning</h6>
-              <div class="badge-row">
-                <span class="badge-soft">statsmodels</span>
-                <span class="badge-soft">Airflow</span>
-                <span class="badge-soft">feature engineering</span>
-                <span class="badge-soft">product metrics</span>
-              </div>
-
-              <div class="mt-3 small text-muted">
-                Prefer proofs over claims — every skill above links to a
-                project.
-              </div>
-            </div>
-          </div>
-
+    
           <!-- Learning Journey -->
           <div class="col-lg-6 d-flex">
             <div class="foundation-card h-100">
