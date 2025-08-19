@@ -1288,3 +1288,131 @@ hr{ border-color: var(--stroke); opacity:1; }
     height: auto !important;
   }
 }
+
+.exp-list{ display:grid; gap:1.1rem; }
+.exp-card{ background: var(--panel); border:1px solid var(--stroke); border-left:4px solid rgb(var(--brand-rgb)); border-radius:.9rem; padding:1rem 1.25rem; }
+.exp-card h5{ font-size:1.05rem; margin-bottom:0; }
+.exp-dates{ white-space:nowrap; color:var(--ink-3); }
+.exp-points li{ margin-bottom:.35rem; }
+
+/* ===== Experience: pin under navbar + own background + tidy spacing ===== */
+
+/* Paint the section so the next section's color never shows through */
+#experience{
+  position: relative;
+  isolation: isolate; /* own paint/stacking context */
+  z-index: 2;
+  background:
+    var(--dot),
+    radial-gradient(1200px 800px at 20% -10%, #15243f 0%, transparent 60%),
+    linear-gradient(180deg, #0b1220 0%, #0b1220 100%);
+  background-size: var(--dot-size), auto, auto;
+  background-color: var(--bg-0);
+  margin: 0 !important;   /* no accidental gaps between sections */
+}
+
+/* Put the section's content right below the fixed navbar, with comfy bottom pad */
+#experience.page-section{
+  padding-block: calc(var(--nav-h) + 8px) 64px !important;
+}
+
+/* Tight, centered header like Projects */
+#experience header{
+  margin: 0 0 14px 0 !important;
+  text-align: center !important;
+}
+
+/* Keep the job cards neatly centered and away from edges */
+#experience .exp-list{
+  max-width: 1000px;      /* tune width as you like */
+  margin: 0 auto;         /* center the stack */
+}
+
+/* Make sure adjacent sections don't pull up or overlap */
+#leadership.page-section,
+#projects.page-section,
+#contact.page-section{
+  margin-top: 0 !important;
+}
+
+/* Adjust spacing for Experience section */
+#experience.snap {
+  min-height: 100dvh;
+  padding-top: calc(var(--nav-h) - 80px) !important; /* move title closer to navbar */
+  padding-bottom: 40px !important;                  /* ensure bottom card fits */
+}
+
+/* Reduce margin above/below the heading */
+#experience header {
+  margin-top: 0 !important;
+  margin-bottom: 12px !important;
+}
+
+/* Make each card the containment boundary for its stretched link */
+.exp-card{
+  position: relative !important;  /* nearest positioned ancestor */
+  z-index: 0;                     /* start a new stacking context */
+  isolation: isolate;             /* keep ::after inside this card */
+  overflow: hidden;               /* prevent bleed outside the card */
+}
+
+/* Ensure the invisible hit area stays within each card */
+.exp-card .stretched-link{ position: static; }
+.exp-card .stretched-link::after{
+  content: "";                    /* some builds need this reinforcement */
+  position: absolute;
+  inset: 0;
+  z-index: 1;                     /* above contents for reliable clicks */
+  border-radius: .9rem;           /* match card radius for focus ring */
+}
+
+/* Make the card feel interactive */
+.exp-card{
+  cursor: pointer;
+  transition: box-shadow .2s ease, transform .15s ease, border-color .2s ease;
+}
+
+/* Gentle lift + brighter title on hover/focus */
+.exp-card:hover,
+.exp-card:focus-within{
+  box-shadow: 0 12px 28px rgba(0,0,0,.34);
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,.14);
+}
+.exp-card:hover h5,
+.exp-card:focus-within h5{ color:#fff; }
+
+/* Strong, accessible keyboard focus */
+.exp-card:focus-within{
+  outline: 2px solid rgba(var(--brand-rgb), .45);
+  outline-offset: 2px;
+}
+
+/* Keep your stretched-link fix and add a tiny "Open ↗" badge on hover */
+.exp-card .stretched-link::after{
+  /* your click overlay stays */
+  content: "";
+  position: absolute; inset: 0; z-index: 1;
+  border-radius: .9rem;
+}
+
+/* Visible hint (appears on hover/focus only) */
+.exp-card .stretched-link::before{
+  content: "Open ↗";
+  position: absolute;
+  right: 12px; bottom: 12px;
+  z-index: 2;
+  font-size: .8rem; font-weight: 700;
+  padding: .25rem .5rem;
+  border-radius: .6rem;
+  background: rgba(255,255,255,.08);
+  border: 1px solid var(--stroke);
+  color: #cfe2ff;
+  opacity: 0; transform: translateY(4px);
+  transition: opacity .18s ease, transform .18s ease;
+}
+.exp-card:hover .stretched-link::before,
+.exp-card:focus-within .stretched-link::before{
+  opacity: 1; transform: translateY(0);
+}
+
