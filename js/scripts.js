@@ -262,3 +262,80 @@ window.addEventListener('DOMContentLoaded', event => {
   sizeSplit();
 })();
 
+
+// Projects Showcase (centered controls, no dots)
+(() => {
+  const root = document.getElementById('projects');
+  if (!root) return;
+
+  const items = [...root.querySelectorAll('.proj-item')];
+  if (!items.length) return;
+
+  const imgEl = root.querySelector('#proj-image');
+  const captionEl = root.querySelector('#proj-caption');
+  const progress = root.querySelector('.visual-progress span');
+  const navBtns = root.querySelectorAll('.proj-nav');
+
+  let idx = 0;
+  let timer = null;
+  const DURATION = 6000; // 6s
+
+  function setProgressRunning(run) {
+    if (!progress) return;
+    progress.style.animation = 'none';
+    void progress.offsetWidth;                // restart
+    if (run) progress.style.animation = `projProgress ${DURATION}ms linear forwards`;
+  }
+
+  function show(next, userInitiated=false) {
+    idx = (next + items.length) % items.length;
+    items.forEach((li, i) => li.classList.toggle('is-active', i === idx));
+
+    const active = items[idx];
+    const src = active.dataset.img || imgEl.getAttribute('src');
+    const title = active.dataset.title || active.querySelector('h5')?.textContent || 'Project';
+
+    if (imgEl) { imgEl.src = src; imgEl.alt = `${title} screenshot`; }
+    if (captionEl) captionEl.textContent = title;
+
+    if (userInitiated) start();
+    else setProgressRunning(true);
+  }
+
+  function start() {
+    stop();
+    setProgressRunning(true);
+    timer = setInterval(() => show(idx + 1), DURATION);
+  }
+  function stop() {
+    if (timer) clearInterval(timer);
+    timer = null;
+    setProgressRunning(false);
+  }
+
+  // nav
+  navBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const dir = parseInt(btn.dataset.dir || '1', 10);
+      show(idx + dir, true);
+    });
+  });
+
+  // pause on hover/focus inside section
+  ['mouseenter','focusin'].forEach(ev => root.addEventListener(ev, stop));
+  ['mouseleave','focusout'].forEach(ev => root.addEventListener(ev, start));
+
+  // keyboard
+  root.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); show(idx - 1, true); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); show(idx + 1, true); }
+  });
+
+  // keyframes (once)
+  const style = document.createElement('style');
+  style.textContent = `@keyframes projProgress { from { width:0% } to { width:100% } }`;
+  document.head.appendChild(style);
+
+  show(0);
+  start();
+})();
