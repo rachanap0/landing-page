@@ -1416,3 +1416,168 @@ hr{ border-color: var(--stroke); opacity:1; }
   opacity: 1; transform: translateY(0);
 }
 
+@media (hover: none) {
+  .exp-card:active{ transform: scale(0.995); }
+  .exp-card .stretched-link::before{ display:none; } /* hides hover pill on touch */
+}
+
+/* Contact: keep snap, no cutoff */
+#contact.snap{
+  min-height: 100dvh;                           /* keep full-screen snap */
+  align-items: flex-start !important;           /* content starts at top */
+  padding-top: calc(var(--nav-h) + 8px) !important; /* title just under navbar */
+  padding-bottom: 88px !important;              /* room for the socials row */
+}
+
+/* Trim oversized margins that push the icons off-screen */
+#contact .col-lg-8.col-xl-6.text-center p.text-muted{
+  margin-bottom: 1.25rem !important;            /* was mb-5 */
+}
+#contact .row.mb-5{                             
+  margin-bottom: 1.25rem !important;            /* shrink big gap under form */
+}
+
+/* Small screens or short viewports: tighten further */
+@media (max-height: 800px){
+  #contact .row.mb-5{ margin-bottom: .75rem !important; }
+  #contact.snap{ padding-bottom: 72px !important; }
+}
+
+/* Contact form – readable text on light fields */
+#contact .form-control{
+  background:#0f192c!important; color:#e7ecf5!important;           /* dark text so it's readable */
+  border: 1px solid rgba(154,193,255,.30) !important;
+}
+#contact .form-control::placeholder{
+   color:#8a94a7!important;                /* medium gray placeholder */
+  opacity: 1 !important;
+}
+#contact .form-floating > label{
+  color: #6b7280 !important;                /* label color when resting */
+}
+#contact .form-control:focus{
+  border-color: rgba(77,130,255,.65) !important;
+  box-shadow: 0 0 0 .2rem rgba(77,130,255,.18) !important;
+}
+#contact .form-floating > .form-control:focus ~ label{
+  color: #365bb5 !important;                /* label on focus */
+}
+
+
+/* CONTACT — fit everything in one screen and show copyright under icons */
+#contact.page-section{
+  /* smaller bottom padding so footer text isn't pushed below fold */
+  padding-block: calc(var(--nav-h) + 8px) 20px !important;
+  /* keep the section exactly a viewport tall (minus navbar) for clean snap */
+  min-height: calc(100dvh - var(--nav-h)) !important;
+}
+
+/* tighten vertical rhythm inside the section */
+#contact p.mb-5{ margin-bottom: 12px !important; }       /* intro paragraph */
+#contact .row.mb-5{ margin-bottom: 16px !important; }    /* form row gap */
+#contact .form-floating{ margin-bottom: 10px !important; } /* inputs gap */
+#contact .btn.btn-xl{ margin-top: 6px !important; }
+
+/* socials + copyright spacing & visibility */
+#contact .mt-3{ margin-top: 8px !important; }            /* icons block */
+#contact #contact-copy{
+  margin-top: 8px !important;
+  color: var(--ink-2) !important;                         /* readable on dark */
+  opacity: .95;
+}
+
+/* CONTACT — unify colors so everything matches the site palette */
+#contact.page-section{
+  /* same textured background as the rest of the page */
+  background:
+    var(--dot),
+    radial-gradient(1200px 800px at 20% -10%, #15243f 0%, transparent 60%),
+    linear-gradient(180deg, #0b1220 0%, #0b1220 100%);
+  background-size: var(--dot-size), auto, auto;
+  background-color: var(--bg-0);
+}
+
+/* Inputs: same dark glass as your cards, readable text/placeholders */
+#contact .form-control{
+  background-color: rgba(255,255,255,.04);
+  border: 1px solid var(--stroke);
+  color: var(--ink);
+}
+#contact .form-control::placeholder{ color: rgba(231,236,245,.75); opacity:1; }
+#contact .form-control:focus{
+  background-color: rgba(255,255,255,.06);
+  border-color: rgba(var(--brand-rgb), .45);
+  box-shadow: 0 0 0 3px rgba(var(--brand-rgb), .18);
+  color: #fff;
+}
+#contact label{ color: var(--ink-2); }
+
+/* Submit button keeps brand gradient */
+#contact .btn.btn-primary{
+  background: linear-gradient(180deg, #4d82ff, #326cff);
+  border-color: transparent;
+}
+#contact .btn.btn-primary:hover{ background:#5597ff; }
+
+/* Icons + copyright: consistent muted ink color */
+#contact .mt-3 a{ color: rgba(231,236,245,.78) !important; }
+#contact .mt-3 a:hover{ color:#fff !important; }
+#contact #contact-copy{ color: var(--ink-2) !important; opacity:.95; }
+
+/* If the old light footer still exists elsewhere, hide it to avoid any pale strip */
+footer.bg-light{ display:none !important; }
+
+/* Back-to-top: floating pill bottom-right */
+#backToTopBtn{
+  position: fixed;
+  right: clamp(14px, 2vw, 22px);
+  bottom: clamp(14px, 2vh, 22px);
+  z-index: 1200;
+
+  display: none;                 /* your JS toggles this */
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid var(--stroke);
+  background: rgba(255,255,255,.08);
+  color: #fff;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 10px 22px rgba(0,0,0,.28);
+  cursor: pointer;
+
+  /* hide the word "Top" visually but keep it for a11y */
+  font-size: 0;
+  transition: transform .12s ease, background .15s ease, box-shadow .15s ease;
+}
+#backToTopBtn::before{
+  content: "↑";
+  font-size: 18px;
+  line-height: 44px;
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+}
+#backToTopBtn:hover{
+  background: rgba(255,255,255,.14);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(0,0,0,.35);
+}
+#backToTopBtn:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(var(--brand-rgb), .35);
+}
+
+@media (max-width: 480px){
+  #backToTopBtn{ right: 12px; bottom: 12px; }
+}
+
+/* Fix overlapping text in floating labels (hide actual placeholders) */
+#contact .form-floating .form-control::placeholder {
+  opacity: 0 !important;      /* Bootstrap expects invisible placeholders */
+  color: transparent !important;
+}
+#contact .form-floating .form-control:focus::placeholder,
+#contact .form-floating .form-control:not(:placeholder-shown)::placeholder {
+  opacity: 0 !important;
+}
+
