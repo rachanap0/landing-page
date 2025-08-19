@@ -26,6 +26,7 @@
 
   /* layout */
   --nav-h: 64px; /* JS can update at runtime */
+  --arrow-nudge: 18px;
 }
 
 /* ========== Base ========== */
@@ -683,3 +684,607 @@ hr{ border-color: var(--stroke); opacity:1; }
 /* Make sure the next section doesn't pull upward with margins */
 #experience.page-section,
 #contact.page-section { margin-top: 0 !important; }
+
+/* ------- Projects: split-view showcase ------- */
+.projects-showcase{
+  isolation: isolate;
+  background:
+    var(--dot),
+    radial-gradient(1200px 800px at 20% -10%, #15243f 0%, transparent 60%),
+    linear-gradient(180deg, #0b1220 0%, #0b1220 100%);
+  background-size: var(--dot-size), auto, auto;
+  background-color: var(--bg-0);
+  min-block-size: calc(100dvh - var(--nav-h));
+  padding-block: calc(var(--nav-h) + 8px) clamp(56px, 6vh, 88px);
+}
+
+.projects-showcase .proj-head{ margin: 0 0 14px 0; text-align: center; }
+.projects-showcase .title{ margin: 0; }
+
+.proj-split{
+  display: grid;
+  grid-template-columns: 1.05fr 1.25fr;   /* visual | details */
+  gap: 1.25rem;
+  align-items: stretch;
+}
+@media (max-width: 992px){
+  .proj-split{ grid-template-columns: 1fr; }
+}
+
+/* LEFT — Visual */
+.proj-visual{ display:flex; flex-direction:column; gap:.75rem; }
+.visual-frame{
+  position: relative;
+  background: var(--panel);
+  border: 1px solid var(--stroke);
+  border-radius: .9rem;
+  overflow: hidden;
+  box-shadow: 0 8px 26px rgba(0,0,0,.25);
+  aspect-ratio: 16/10;
+}
+.visual-frame img{
+  width: 100%; height: 100%; object-fit: cover; display:block;
+  transform: translateZ(0);
+}
+.visual-caption{
+  position:absolute; left:.9rem; bottom:.6rem;
+  padding:.25rem .55rem; border-radius:.55rem;
+  background: rgba(0,0,0,.35); color:#e7ecf5; font-weight:700; font-size:.95rem;
+  border:1px solid rgba(255,255,255,.18);
+}
+.visual-progress{
+  position:absolute; left:0; right:0; bottom:0; height:3px;
+  background: rgba(255,255,255,.08);
+}
+.visual-progress span{
+  display:block; height:100%; width:0%;
+  background: linear-gradient(90deg, rgba(var(--brand-rgb),.85), rgba(var(--brand-rgb),.35));
+  transform-origin: left center;
+}
+.visual-controls{ display:flex; gap:.5rem; }
+.proj-nav{
+  flex:0 0 auto; width:40px; height:40px; border-radius:999px;
+  display:grid; place-items:center;
+  color:#cfe2ff; background: rgba(255,255,255,.06); border:1px solid var(--stroke);
+}
+.proj-nav:hover{ background: rgba(255,255,255,.12); color:#fff; }
+
+/* RIGHT — Details */
+.proj-detail{
+  background: var(--panel);
+  border:1px solid var(--stroke);
+  border-radius:.9rem;
+  padding: .9rem;
+  box-shadow: 0 8px 26px rgba(0,0,0,.25);
+  display:flex; flex-direction:column; min-height:0;
+}
+.proj-list{ list-style:none; margin:0; padding:0; position:relative; min-height:0; flex:1 1 auto; }
+.proj-item{ display:none; }
+.proj-item.is-active{ display:block; }
+
+.project-card.big{
+  height:100%; min-height: 0;
+  padding: 1.1rem 1.2rem;
+  border-left-width: 4px;
+}
+.project-card.big h5{ font-size:1.1rem; margin:0; }
+
+/* Dots (tabs) */
+.proj-dots{
+  display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.75rem; justify-content:center;
+}
+.proj-dots button{
+  width:10px; height:10px; border-radius:999px; border:1px solid rgba(154,193,255,.4);
+  background: rgba(154,193,255,.12); padding:0;
+}
+.proj-dots button.is-active{ background: rgb(var(--brand-rgb)); border-color: rgb(var(--brand-rgb)); }
+
+/* Prevent any bleed and keep following sections above if needed */
+#projects{ position:relative; z-index: 0; }
+.page-section + .page-section{ position:relative; z-index:1; }
+
+/* --- Taller split; both sides fill the section --- */
+.projects-showcase .proj-split{
+  position: relative;                   /* for centered controls */
+  min-height: calc(100dvh - var(--nav-h) - 140px);  /* fills the section under the title */
+  align-items: stretch;                 /* stretch both columns to same height */
+}
+
+/* Kill the dots + old per-side controls (if still in DOM) */
+.projects-showcase .proj-dots,
+.projects-showcase .visual-controls{ display:none !important; }
+
+/* Centered controls between columns */
+.projects-showcase .proj-center-controls{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  display: flex;
+  gap: .6rem;
+  z-index: 2;
+  pointer-events: none;                 /* let clicks fall through except on buttons */
+}
+.projects-showcase .proj-center-controls .proj-nav{
+  pointer-events: auto;
+  width: 46px; height: 46px;
+  border-radius: 999px;
+  display: grid; place-items: center;
+  color: #cfe2ff;
+  background: rgba(255,255,255,.08);
+  border: 1px solid var(--stroke);
+  box-shadow: 0 10px 22px rgba(0,0,0,.25);
+}
+.projects-showcase .proj-center-controls .proj-nav:hover{
+  background: rgba(255,255,255,.14); color:#fff;
+}
+
+/* LEFT: make image frame fill available height (remove aspect lock) */
+.projects-showcase .visual-frame{
+  height: 100%;
+  aspect-ratio: auto;                   /* cancel 16:10 cap */
+}
+
+/* RIGHT: single-box look (no box inside box) */
+.projects-showcase .proj-detail{
+  /* keep the outer card as the single box */
+  padding: 1rem;                        /* a bit more breathing room */
+}
+
+/* Remove chrome from the inner article (content only) */
+.projects-showcase .project-card.big{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  height: 100%;
+  display: flex; flex-direction: column; min-height: 0;
+}
+
+/* Fix panel height; scroll the content inside if it overflows */
+.projects-showcase .proj-list{
+  height: 100%;
+}
+.projects-showcase .proj-item{
+  height: 100%;
+}
+.projects-showcase .proj-item.is-active{
+  display: block; height: 100%;
+}
+.projects-showcase .proj-item.is-active > .project-card{
+  overflow-y: auto;                     /* scroll only the content, not the box */
+  -webkit-overflow-scrolling: touch;
+  padding-right: .25rem;                /* tiny gutter for scrollbar */
+}
+
+/* Optional: nicer scrollbars on dark */
+.projects-showcase .proj-item.is-active > .project-card::-webkit-scrollbar{
+  width: 8px;
+}
+.projects-showcase .proj-item.is-active > .project-card::-webkit-scrollbar-thumb{
+  background: rgba(154,193,255,.25);
+  border-radius: 8px;
+}
+/* ================================
+   PROJECTS — bulletproof overrides
+   Place at the END of styles.css
+   ================================ */
+
+#projects .projects-showcase{
+  /* easy tuning knobs */
+  --proj-max-h: 680px;      /* max card height on desktop */
+  --proj-offset: 160px;     /* header/nav/title/padding fudge */
+}
+
+/* ONE unified card that is ALWAYS fully visible inside the section */
+#projects .projects-showcase .proj-split{
+  position: relative !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  max-width: 1200px !important;
+
+  /* never taller than the visible part of the section */
+  height: clamp(420px,
+                calc(100dvh - var(--nav-h) - var(--proj-offset)),
+                var(--proj-max-h)) !important;
+  max-height: calc(100dvh - var(--nav-h) - var(--proj-offset)) !important;
+
+  /* reserve room so the bottom arrows never overlap content */
+  padding-bottom: 64px !important;
+
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 0 !important;
+
+  background: var(--panel) !important;
+  border: 1px solid var(--stroke) !important;
+  border-radius: .9rem !important;
+  box-shadow: 0 10px 26px rgba(0,0,0,.28) !important;
+  overflow: hidden !important;
+  align-items: stretch !important;
+}
+#projects .projects-showcase .proj-split > *{ min-height: 0 !important; }
+
+/* soft center divider */
+#projects .projects-showcase .proj-split::before{
+  content:"";
+  position:absolute; left:50%; top:14px; bottom:14px; width:1px;
+  background: linear-gradient(transparent, rgba(255,255,255,.08) 12%, rgba(255,255,255,.08) 88%, transparent);
+  pointer-events:none;
+}
+
+/* LEFT — image fits the box, never resizes the card */
+#projects .projects-showcase .proj-visual,
+#projects .projects-showcase .visual-frame{
+  height: 100% !important;
+}
+#projects .projects-showcase .visual-frame{
+  display: grid !important;
+  grid-template-rows: 1fr auto !important;   /* image | caption */
+  padding: 6px 6px 0 6px !important;
+  background: transparent !important;
+  border: 0 !important; box-shadow: none !important; border-radius: 0 !important;
+}
+#projects .projects-showcase .visual-frame img{
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;              /* fit inside fixed card */
+}
+#projects .projects-showcase .visual-caption{ margin: 10px auto 8px !important; }
+
+/* RIGHT — vertically centered details; one clean surface (no box-in-box) */
+#projects .projects-showcase .proj-detail{
+  padding: 16px 22px 0 16px !important;
+  display: flex !important; flex-direction: column !important;
+  background: transparent !important;
+  border: 0 !important; box-shadow: none !important; border-radius: 0 !important;
+}
+#projects .projects-showcase .proj-detail .project-card,
+#projects .projects-showcase .proj-detail .project-card.big{
+  background: transparent !important;
+  border: 0 !important; box-shadow: none !important;
+
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;     /* CENTER the whole text block */
+  align-items: flex-start !important;     /* keep text left-aligned */
+  gap: .6rem !important;
+
+  overflow-y: auto !important;            /* long project? scroll inside */
+  -webkit-overflow-scrolling: touch !important;
+  padding-right: .25rem !important;
+}
+/* tighten inner rhythm */
+#projects .projects-showcase .project-card header h5{ margin: 0 0 .5rem 0 !important; }
+#projects .projects-showcase .project-card > p.small{ margin: 0 0 .5rem 0 !important; }
+#projects .projects-showcase .project-card .project-spec{
+  margin: .15rem 0 .2rem 0 !important; padding-left: 1.1rem !important;
+}
+#projects .projects-showcase .project-card .project-spec li{ margin: .26rem 0 !important; }
+#projects .projects-showcase .project-card .project-tags{ margin-top: .5rem !important; }
+#projects .projects-showcase .project-card .mt-3{ margin-top: .6rem !important; }
+
+/* bottom-center arrows (force out of the middle) */
+#projects .projects-showcase .proj-center-controls{
+  position: absolute !important;
+  left: 50% !important; bottom: 12px !important;
+  top: auto !important;
+  transform: translateX(-50%) !important;
+  display: flex !important; gap: .6rem !important;
+  z-index: 5 !important;
+}
+#projects .projects-showcase .proj-center-controls .proj-nav{
+  width: 44px !important; height: 44px !important;
+  border-radius: 999px !important;
+  display: grid !important; place-items: center !important;
+  color: #cfe2ff !important;
+  background: rgba(255,255,255,.08) !important;
+  border: 1px solid var(--stroke) !important;
+  box-shadow: 0 10px 22px rgba(0,0,0,.25) !important;
+}
+#projects .projects-showcase .proj-center-controls .proj-nav:hover{
+  background: rgba(255,255,255,.14) !important; color:#fff !important;
+}
+
+/* hide any legacy side controls/dots if they still exist */
+#projects .projects-showcase .visual-controls,
+#projects .projects-showcase .proj-dots{ display:none !important; }
+
+/* mobile: stack and let height relax so nothing clips */
+@media (max-width: 992px){
+  #projects .projects-showcase .proj-split{
+    grid-template-columns: 1fr !important;
+    height: auto !important;
+    max-height: none !important;
+    padding-bottom: 56px !important;
+  }
+  #projects .projects-showcase .proj-split::before{ display:none !important; }
+}
+
+
+/* =========================
+   Projects – center right pane + bottom arrows
+   ========================= */
+
+/* Put the shared arrows at the bottom center of the split box */
+.projects-showcase .proj-center-controls{
+  position: absolute !important;
+  left: 50% !important;
+  bottom: 14px !important;
+  top: auto !important;
+  transform: translateX(-50%) !important;
+  display: flex !important;
+  gap: .6rem !important;
+  z-index: 3 !important;
+}
+
+/* Make sure the split stretches both sides and the image doesn't set the height */
+.projects-showcase .proj-split{ align-items: stretch !important; }
+.projects-showcase .visual-frame{ height: 100% !important; aspect-ratio: auto !important; }
+.projects-showcase .visual-frame img{ width:100% !important; height:100% !important; object-fit: cover !important; }
+
+/* Center the active project's content block in the right pane */
+.projects-showcase .proj-detail{
+  display: grid !important;
+  place-items: center !important;          /* centers vertically + horizontally */
+}
+
+.projects-showcase .proj-detail .proj-list{ width: 100% !important; }
+.projects-showcase .proj-detail .proj-item{ display: none; }
+.projects-showcase .proj-detail .proj-item.is-active{ display: block !important; }
+
+/* The card itself becomes a centered column with readable width */
+.projects-showcase .proj-detail .proj-item.is-active > .project-card{
+  max-width: 720px !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;      /* vertical center */
+  align-items: center !important;          /* horizontal center */
+  text-align: center !important;           /* center headings/summary */
+  gap: .75rem !important;
+  background: transparent !important;      /* avoids "box inside a box" look */
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Header from Bootstrap had 'justify-content-between' – override to center */
+.projects-showcase .proj-detail .project-card > header{
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: .5rem !important;
+  width: 100% !important;
+}
+
+/* Keep bullets readable (left-aligned) within the centered block */
+.projects-showcase .proj-detail .project-card .project-spec{
+  text-align: left !important;
+  align-self: stretch !important;          /* let list take full width of the card */
+  margin: .2rem 0 .4rem 0 !important;
+  padding-left: 1.1rem !important;
+}
+
+/* Tags centered under the list */
+.projects-showcase .proj-detail .project-card .project-tags{
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: .35rem !important;
+  margin-top: .35rem !important;
+}
+
+/* CTAs directly underneath, centered */
+.projects-showcase .proj-detail .project-card .mt-3{
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: .6rem !important;
+  margin-top: .6rem !important;
+}
+
+/* Safety: center a lone button even if .mt-3 wrapper varies */
+.projects-showcase .proj-detail .project-card .btn{
+  align-self: center !important;
+}
+
+/* Projects – badge above title + centered bullets */
+.projects-showcase .proj-detail .project-card > header{
+  display: flex !important;
+  flex-direction: column !important;       /* stack badge and title */
+  justify-content: center !important;
+  align-items: center !important;
+  gap: .5rem !important;
+  width: 100% !important;
+}
+
+.projects-showcase .proj-detail .project-card > header .badge-case{
+  order: -1 !important;                    /* put badge above the title */
+  align-self: center !important;
+}
+
+/* Center the bullet list (dots + text) */
+.projects-showcase .proj-detail .project-card .project-spec{
+  text-align: center !important;           /* center the lines */
+  list-style-position: inside !important;  /* keep bullets with the text block */
+  padding-left: 0 !important;
+  margin: .25rem 0 .5rem 0 !important;
+}
+.projects-showcase .proj-detail .project-card .project-spec li{
+  margin: .28rem 0 !important;
+}
+
+/* Projects – arrows under the CTAs at the bottom center of the unified box */
+.projects-showcase .proj-split{
+  position: relative !important;
+  padding-bottom: 72px !important;   /* space so arrows never overlap CTAs */
+}
+
+.projects-showcase .proj-center-controls{
+  position: absolute !important;
+  top: auto !important;
+  bottom: 18px !important;           /* sits just below the CTA row */
+  left: 50% !important;              /* bottom center of the unified card */
+  transform: translateX(-50%) !important;
+  display: flex !important;
+  gap: .75rem !important;
+  pointer-events: none !important;   /* only the buttons receive pointer events */
+  z-index: 5 !important;
+}
+.projects-showcase .proj-center-controls .proj-nav{
+  pointer-events: auto !important;
+}
+
+/* (Optional) keep same behavior on mobile; remove if you want a different layout there */
+@media (max-width: 992px){
+  .projects-showcase .proj-split{ padding-bottom: 64px !important; }
+  .projects-showcase .proj-center-controls{ bottom: 14px !important; }
+}
+
+/* Arrows directly under CTAs in the right column */
+.projects-showcase .proj-detail{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:stretch !important;
+}
+/* Center the content block itself and cap its width */
+.projects-showcase .proj-detail .project-card.big{
+  max-width: 720px;                    /* tune as you like */
+  margin-inline: auto;                 /* centers the card */
+}
+
+.projects-showcase .proj-detail .proj-center-controls{
+  position:static !important;
+  width: max-content !important;
+  display:flex !important;
+  justify-content:center !important;
+  gap:.75rem !important;
+  margin:14px auto 0 !important;   /* space below CTA row */
+}
+
+.projects-showcase .proj-center-controls .proj-nav{
+  width:44px !important;
+  height:44px !important;
+  border-radius:999px !important;
+  display:grid !important;
+  place-items:center !important;
+  color:#cfe2ff !important;
+  background:rgba(255,255,255,.08) !important;
+  border:1px solid var(--stroke) !important;
+  box-shadow:0 10px 22px rgba(0,0,0,.25) !important;
+}
+
+/* remove any old middle-of-card placement */
+.projects-showcase .proj-split{ padding-bottom:0 !important; }
+/* keep divider line logic as-is */
+
+@media (min-width: 992px){
+  .projects-showcase .project-card .proj-center-controls{
+    position: relative;
+    left: var(--arrow-nudge);
+    margin: 14px auto 0;
+    display: flex;
+    justify-content: center;
+    gap: .75rem;
+    width: max-content;
+  }
+}
+
+/* Nudge the bottom arrows slightly to the right (stays under CTAs) */
+
+
+.projects-showcase .proj-center-controls{
+  left: 50% !important;
+  transform: translateX(calc(-50% + 45px)) !important;  
+  bottom: 18px !important;                               
+}
+
+/* ==== Projects — bottom-pinned arrows in right panel ==== */
+#projects .proj-detail{
+  position: relative;
+  padding-bottom: 64px;              /* reserve space so arrows never overlap CTAs/content */
+}
+
+/* remove any old per-side image controls, if still present */
+#projects .proj-visual .visual-controls{ display:none !important; }
+
+/* if arrows still exist inside the article, hide those */
+#projects .proj-detail .project-card.big .proj-center-controls{ display:none !important; }
+
+/* single arrows block, placed as a sibling of <ol class="proj-list"> */
+#projects .proj-detail > .proj-center-controls{
+  position: absolute;
+  left: 50%;
+  bottom: 0;                         /* <<< all the way to the bottom edge */
+  transform: translateX(-50%);
+  display: flex;
+  gap: .75rem;
+  z-index: 3;
+}
+
+/* arrow button look */
+#projects .proj-detail > .proj-center-controls .proj-nav{
+  width: 44px; height: 44px; border-radius: 999px;
+  display: grid; place-items: center;
+  color: #cfe2ff;
+  background: rgba(255,255,255,.08);
+  border: 1px solid var(--stroke);
+  box-shadow: 0 10px 22px rgba(0,0,0,.25);
+}
+#projects .proj-detail > .proj-center-controls .proj-nav:hover{
+  background: rgba(255,255,255,.14); color:#fff;
+}
+
+
+/* === Projects: lock both columns to a fixed, equal height === */
+/* Tweak this one number to taste (e.g., 520px, 560px, 600px) */
+:root { --proj-fixed-h: 560px; }
+
+/* Make each side the same height */
+.projects-showcase .proj-visual .visual-frame,
+.projects-showcase .proj-detail {
+  height: var(--proj-fixed-h) !important;
+}
+
+/* Image should cover the fixed box without changing its height */
+.projects-showcase .visual-frame {
+  aspect-ratio: auto !important;   /* cancel 16:10 */
+}
+.projects-showcase .visual-frame img{
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* Right side: keep the outer box fixed and scroll only the content if it overflows */
+.projects-showcase .proj-detail {
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+.projects-showcase .proj-detail .proj-list,
+.projects-showcase .proj-detail .proj-item.is-active,
+.projects-showcase .proj-detail .proj-item.is-active > .project-card{
+  height: 100% !important;
+}
+.projects-showcase .proj-detail .proj-item.is-active > .project-card{
+  overflow-y: auto !important;          /* long text scrolls inside */
+  -webkit-overflow-scrolling: touch !important;
+  background: transparent !important;   /* keeps your current look */
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Make sure the grid stretches both children equally */
+.projects-showcase .proj-split{
+  align-items: stretch !important;
+}
+
+/* (Optional) On mobile, let them auto-size again so nothing feels cramped */
+@media (max-width: 992px){
+  .projects-showcase .proj-visual .visual-frame,
+  .projects-showcase .proj-detail{
+    height: auto !important;
+  }
+}
