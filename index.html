@@ -133,16 +133,13 @@
               <a class="nav-link" href="#about">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#foundations">Foundations</a>
+              <a class="nav-link" href="#leadership">Leadership</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#projects">Projects</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#experience">Experience</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#leadership">Leadership</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#contact">Contact</a>
@@ -225,7 +222,7 @@
         <div class="actions">
           <a
             class="btn-primary"
-            href="https://drive.google.com/file/d/1Fd5_69QzZj_2L9iz6c2bC1dTygVOnQsN/view?usp=sharing"
+            href="https://drive.google.com/file/d/1x3n_y8SN9sf_-H_poJ46Yz5BeDiFwu4Y/view?usp=share_link"
             download
             >Download Resume</a
           >
@@ -362,12 +359,12 @@
             <figure class="visual-frame">
               <img
                 id="proj-image"
-                src="assets/img/retreat2.jpg"
+                src="assets/img/projects/housing.jpg"
                 alt="Project screenshot"
                 loading="lazy"
               />
               <figcaption id="proj-caption" class="visual-caption">
-                Churn Risk Scoring
+                Housing Price Prediction
               </figcaption>
               <div class="visual-progress" aria-hidden="true">
                 <span></span>
@@ -378,136 +375,42 @@
           <!-- RIGHT: Details (one active at a time) -->
           <div class="proj-detail" id="proj-detail">
             <ol class="proj-list">
-              <!-- Item 1 -->
+              <!-- 1. Housing Price Prediction -->
               <li
                 class="proj-item is-active"
-                data-img="assets/img/honors.jpg"
-                data-title="Churn Risk Scoring"
+                data-img="assets/img/housing_pred.png"
+                data-title="Housing Price Prediction"
               >
                 <article class="project-card big">
                   <header class="project-header text-center mb-2">
                     <div class="mb-1">
-                      <span class="badge-case">Case Study</span>
+                      <span class="badge-case">ML · Regression</span>
                     </div>
-                    <h5 class="mb-1">Churn Risk Scoring</h5>
+                    <h5 class="mb-1">Housing Price Prediction</h5>
                   </header>
 
                   <p class="small text-muted mb-2 text-center">
-                    Subscription data → features → model → retention actions.
+                    Predicts sale price from home features using regression.
                   </p>
 
                   <ul class="project-spec small mb-3">
                     <li>
-                      <strong>Problem:</strong> Identify at-risk users before
-                      renewal
+                      <strong>Focus:</strong> Accurate, explainable pricing with
+                      key feature drivers.
                     </li>
                     <li>
-                      <strong>Data:</strong> events, billing, support tickets
+                      <strong>Method:</strong> scikit-learn pipeline,
+                      OLS/Ridge/Lasso, one-hot + scaling, k-fold CV.
                     </li>
                     <li>
-                      <strong>Method:</strong> SQL feature store + Python
-                      (XGBoost)
-                    </li>
-                    <li><strong>Impact:</strong> −11% churn in pilot cohort</li>
-                  </ul>
-
-                  <div class="project-tags text-center">
-                    <span>SQL</span><span>Python</span><span>XGBoost</span
-                    ><span>Airflow</span>
-                  </div>
-
-                  <div
-                    class="mt-3 d-flex gap-2 flex-wrap justify-content-center"
-                  >
-                    <a class="btn btn-primary btn-sm" href="#" target="_blank"
-                      >GitHub</a
-                    >
-                    <a
-                      class="btn btn-outline-primary btn-sm"
-                      href="#"
-                      target="_blank"
-                      >Report</a
-                    >
-                  </div>
-                </article>
-              </li>
-
-              <!-- Item 2 -->
-              <li
-                class="proj-item"
-                data-img="assets/img/honors2.jpg"
-                data-title="A/B Test Analyzer"
-              >
-                <article class="project-card big">
-                  <header class="project-header text-center mb-2">
-                    <div class="mb-1"><span class="badge-case">Tool</span></div>
-                    <h5 class="mb-1">A/B Test Analyzer</h5>
-                  </header>
-
-                  <p class="small text-muted mb-2 text-center">
-                    Automates power checks, CUPED, and readable summaries.
-                  </p>
-
-                  <ul class="project-spec small mb-3">
-                    <li>
-                      <strong>Problem:</strong> Slow, inconsistent experiment
-                      reads
-                    </li>
-                    <li><strong>Data:</strong> experiment logs + metrics DB</li>
-                    <li>
-                      <strong>Method:</strong> Python (pandas, statsmodels)
-                    </li>
-                    <li><strong>Impact:</strong> 60% faster analysis cycle</li>
-                  </ul>
-
-                  <div class="project-tags text-center">
-                    <span>Python</span><span>Pandas</span
-                    ><span>Statsmodels</span><span>Dash</span>
-                  </div>
-
-                  <div
-                    class="mt-3 d-flex gap-2 flex-wrap justify-content-center"
-                  >
-                    <a class="btn btn-primary btn-sm" href="#" target="_blank"
-                      >GitHub</a
-                    >
-                    <a
-                      class="btn btn-outline-primary btn-sm"
-                      href="#"
-                      target="_blank"
-                      >Live Demo</a
-                    >
-                  </div>
-                </article>
-              </li>
-
-              <!-- Item 3 -->
-              <li
-                class="proj-item"
-                data-img="assets/img/honors3.jpg"
-                data-title="Retail Sales EDA"
-              >
-                <article class="project-card big">
-                  <header class="project-header text-center mb-2">
-                    <div class="mb-1"><span class="badge-case">EDA</span></div>
-                    <h5 class="mb-1">Retail Sales EDA</h5>
-                  </header>
-
-                  <p class="small text-muted mb-2 text-center">
-                    Cleaning, seasonality, outliers → clear visuals.
-                  </p>
-
-                  <ul class="project-spec small mb-3">
-                    <li>
-                      <strong>Focus:</strong> Seasonal patterns &amp; anomalies
-                    </li>
-                    <li>
-                      <strong>Method:</strong> Python (pandas, matplotlib)
+                      <strong>Deliverable:</strong>Notebook, trained model,
+                      RMSE/MAE report, feature-importance plots
                     </li>
                   </ul>
 
                   <div class="project-tags text-center">
-                    <span>Python</span><span>EDA</span><span>Viz</span>
+                    <span>Python</span><span>pandas</span
+                    ><span>Multiple-linear-regression</span><span>EDA</span>
                   </div>
 
                   <div
@@ -515,9 +418,218 @@
                   >
                     <a
                       class="btn btn-primary btn-sm"
-                      href="https://github.com/rachanap0"
+                      href="https://github.com/rachanap0/Housing-Price-Prediction"
                       target="_blank"
-                      >Notebook</a
+                      rel="noopener"
+                      >GitHub</a
+                    >
+                  </div>
+                </article>
+              </li>
+
+              <!-- 2. Global Layoffs SQL Analysis -->
+              <li
+                class="proj-item"
+                data-img="assets/img/layoff.jpg"
+                data-title="Global Layoffs — SQL Analysis"
+              >
+                <article class="project-card big">
+                  <header class="project-header text-center mb-2">
+                    <div class="mb-1">
+                      <span class="badge-case">SQL · Case Study</span>
+                    </div>
+                    <h5 class="mb-1">Global Layoffs — SQL Analysis</h5>
+                  </header>
+
+                  <p class="small text-muted mb-2 text-center">
+                    Data cleaning and analysis over layoff trends using CTEs,
+                    window functions, and aggregations.
+                  </p>
+
+                  <ul class="project-spec small mb-3">
+                    <li>
+                      <strong>Focus:</strong> Validate, aggregate, and track
+                      layoffs across industries, and location.
+                    </li>
+                    <li>
+                      <strong>Method:</strong> SQL (CTEs, partitions, ranking)
+                    </li>
+                    <li>
+                      <strong>Deliverable:</strong>Reusable views/queries and
+                      dashboard-ready summary tables.
+                    </li>
+                  </ul>
+
+                  <div class="project-tags text-center">
+                    <span>SQL</span><span>CTEs</span
+                    ><span>Window Functions</span><span>Data Cleaning</span>
+                  </div>
+
+                  <div
+                    class="mt-3 d-flex gap-2 flex-wrap justify-content-center"
+                  >
+                    <a
+                      class="btn btn-primary btn-sm"
+                      href="https://github.com/rachanap0/global-layoffs-sql-analysis"
+                      target="_blank"
+                      rel="noopener"
+                      >GitHub</a
+                    >
+                  </div>
+                </article>
+              </li>
+
+              <!-- 3. Surgical Equipments Tracking System -->
+              <li
+                class="proj-item"
+                data-img="assets/img/sets.jpg"
+                data-title="Surgical Equipments Tracking System"
+              >
+                <article class="project-card big">
+                  <header class="project-header text-center mb-2">
+                    <div class="mb-1">
+                      <span class="badge-case">Full Stack</span>
+                    </div>
+                    <h5 class="mb-1">Surgical Equipments Tracking System</h5>
+                  </header>
+
+                  <p class="small text-muted mb-2 text-center">
+                    Tracks surgical instrument inventory and usage with RFID.
+                  </p>
+
+                  <ul class="project-spec small mb-3">
+                    <li>
+                      <strong>Focus:</strong> End-to-end instrument tracking
+                      with live set verification, stock alerts, and searchable
+                      history.
+                    </li>
+                    <li>
+                      <strong>Method:</strong> Tailwind UI, Node/Express API,
+                      MySQL, Auth0, WebSockets, RFID.
+                    </li>
+                    <li>
+                      <strong>Deliverable:</strong> End-to-end portal with
+                      role-based access, real-time status views, and audit trail
+                      downloads.
+                    </li>
+                  </ul>
+
+                  <div class="project-tags text-center">
+                    <span>Next.js</span><span>Node.js</span><span>MySQL</span>
+                  </div>
+
+                  <div
+                    class="mt-3 d-flex gap-2 flex-wrap justify-content-center"
+                  >
+                    <a
+                      class="btn btn-primary btn-sm"
+                      href="https://github.com/m-fazeel/SETS"
+                      target="_blank"
+                      rel="noopener"
+                      >GitHub</a
+                    >
+                  </div>
+                </article>
+              </li>
+
+              <!-- 4. Currency Converter -->
+              <li
+                class="proj-item"
+                data-img="assets/img/currency_converter.png"
+                data-title="Currency Converter"
+              >
+                <article class="project-card big">
+                  <header class="project-header text-center mb-2">
+                    <div class="mb-1">
+                      <span class="badge-case">Chrome Extension</span>
+                    </div>
+                    <h5 class="mb-1">Currency Converter</h5>
+                  </header>
+
+                  <p class="small text-muted mb-2 text-center">
+                    Chrome extension for quick currency conversion with live
+                    rates.
+                  </p>
+
+                  <ul class="project-spec small mb-3">
+                    <li>
+                      <strong>Focus:</strong>One-click conversion, precise
+                      rounding, fast lightweight UI.
+                    </li>
+                    <li>
+                      <strong>Method:</strong> MV3 popup, cache rates from an
+                      API, save user defaults.
+                    </li>
+                    <li>
+                      <strong>Deliverable:</strong> Installable extension, easy
+                      setup/usage README.
+                    </li>
+                  </ul>
+
+                  <div class="project-tags text-center">
+                    <span>Ext</span><span>MV3</span><span>JavaScript</span>
+                  </div>
+
+                  <div
+                    class="mt-3 d-flex gap-2 flex-wrap justify-content-center"
+                  >
+                    <a
+                      class="btn btn-primary btn-sm"
+                      href="https://github.com/rachanap0/Currency_Converter"
+                      target="_blank"
+                      rel="noopener"
+                      >GitHub</a
+                    >
+                  </div>
+                </article>
+              </li>
+
+              <!-- 5. Job Market Trend Analysis -->
+              <li
+                class="proj-item"
+                data-img="assets/img/job_market.jpg"
+                data-title="Job Market Trend Analysis"
+              >
+                <article class="project-card big">
+                  <header class="project-header text-center mb-2">
+                    <div class="mb-1">
+                      <span class="badge-case">EDA · Viz</span>
+                    </div>
+                    <h5 class="mb-1">Job Market Trend Analysis</h5>
+                  </header>
+
+                  <p class="small text-muted mb-2 text-center">
+                    Exploratory analysis of job postings & skills demand with
+                    clear visuals.
+                  </p>
+
+                  <ul class="project-spec small mb-3">
+                    <li>
+                      <strong>Focus:</strong> Roles, skills, trends over time
+                    </li>
+                    <li>
+                      <strong>Method:</strong> pandas, visualization, numpy,
+                      Jobspy
+                    </li>
+                    <li>
+                      <strong>Deliverable:</strong> Insightful plots & summaries
+                    </li>
+                  </ul>
+
+                  <div class="project-tags text-center">
+                    <span>Python</span><span>Pandas</span
+                    ><span>Visualization</span>
+                  </div>
+
+                  <div
+                    class="mt-3 d-flex gap-2 flex-wrap justify-content-center"
+                  >
+                    <a
+                      class="btn btn-primary btn-sm"
+                      href="https://github.com/rachanap0/Job-Market-Trend-Analysis"
+                      target="_blank"
+                      rel="noopener"
+                      >GitHub</a
                     >
                   </div>
                 </article>
@@ -556,7 +668,7 @@
             <header
               class="d-flex justify-content-between align-items-center mb-2"
             >
-              <h5>Technical Writer · Proventus Analytics</h5>
+              <h5>Software Engineer · Proventus Analytics</h5>
               <span class="exp-dates">Aug 2025 – Present</span>
             </header>
             <ul class="exp-points small">
@@ -565,12 +677,13 @@
                 onboarding.
               </li>
               <li>
-                Standardized API documentation with Swagger for easier client
-                adoption.
+                Implementing features that improve workflow efficiency and data
+                integrity for rental management operations.
               </li>
               <li>
-                Collaborated with developers and product managers to clarify
-                requirements and outputs.
+                Contributing to the development of RentMatrix, a SAAS platform
+                for rental property management, enabling automated lease
+                tracking, payment processing, and tenant communication.
               </li>
             </ul>
             <a
@@ -587,21 +700,29 @@
             <header
               class="d-flex justify-content-between align-items-center mb-2"
             >
-              <h5>Product Manager · Veel</h5>
+              <h5>Product Manager/ Data Analyst · Veel</h5>
               <span class="exp-dates">Dec 2024 – Aug 2025</span>
             </header>
             <ul class="exp-points small">
               <li>
-                Led development of Moderator platform enhancements and creator
-                onboarding automation.
+                LConverted user behavior analysis into detailed tracking specs,
+                documenting event names, parameters, and workflows to ensure
+                accurate data collection and feature measurement.
               </li>
               <li>
-                Managed cross-functional interns (frontend, backend, QA, AI/ML)
-                to deliver features on time.
+                Defined and aligned data collection requirements across
+                frontend, backend, and QA teams; validated implementation to
+                maintain data integrity.
               </li>
               <li>
-                Defined PRDs with detailed deliverables, error messages, and
-                structured test flows.
+                Conducted QA and backend data validation, verifying event
+                accuracy and documenting issues for iteration based on user
+                testing and feedback.
+              </li>
+              <li>
+                Delivered dashboards and insights that guided cross-functional
+                teams and informed data-driven decisions for the SaaS video
+                marketing platform.
               </li>
             </ul>
             <a
@@ -618,21 +739,24 @@
             <header
               class="d-flex justify-content-between align-items-center mb-2"
             >
-              <h5>Business Analyst Intern · Veel</h5>
+              <h5>Business Data Analyst Intern · Veel</h5>
               <span class="exp-dates">Oct 2024 – Dec 2024</span>
             </header>
             <ul class="exp-points small">
               <li>
-                Analyzed product performance metrics and created dashboards for
-                leadership.
+                Integrated and analyzed product event data using PostHog and GTM
+                to track user flows, identify friction points, and support
+                data-driven platform optimization.
               </li>
               <li>
-                Collaborated with engineering and design to align features with
-                customer insights.
+                Delivered data insights to product and leadership teams,
+                influencing prioritization of features that improved
+                collaboration efficiency and user retention.
               </li>
               <li>
-                Transitioned to full-time Product Manager after internship
-                success.
+                Built technical reports and dashboard using Tableau and SQL;
+                documented schemas, tracking logic, and analytical findings to
+                support roadmap planning and feature validation.
               </li>
             </ul>
             <a
@@ -762,7 +886,7 @@
               <nav class="quick-links-row" aria-label="Quick links">
                 <a
                   class="ql-pill"
-                  href="https://medium.com/@YOUR_HANDLE"
+                  href="https://tr.ee/EdFE2jcvLn"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Open blog"
@@ -771,7 +895,7 @@
                 </a>
                 <a
                   class="ql-pill"
-                  href="https://YOUR-OLD-PORTFOLIO-URL.com"
+                  href="https://rachanapandey.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Open old portfolio"
@@ -780,7 +904,7 @@
                 </a>
                 <a
                   class="ql-pill"
-                  href="https://drive.google.com/file/d/1Fd5_69QzZj_2L9iz6c2bC1dTygVOnQsN/view?usp=sharing"
+                  href="https://drive.google.com/file/d/1x3n_y8SN9sf_-H_poJ46Yz5BeDiFwu4Y/view?usp=share_link"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Open resume"
