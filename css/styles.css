@@ -1581,3 +1581,305 @@ footer.bg-light{ display:none !important; }
   opacity: 0 !important;
 }
 
+
+/* Keep the whole Contact section visible & aligned */
+#contact.page-section{
+  padding-block: calc(var(--nav-h) + 8px) 20px !important;
+  min-height: calc(100dvh - var(--nav-h)) !important;
+  background:
+    var(--dot),
+    radial-gradient(1200px 800px at 20% -10%, #15243f 0%, transparent 60%),
+    linear-gradient(180deg, #0b1220 0%, #0b1220 100%);
+  background-size: var(--dot-size), auto, auto;
+  background-color: var(--bg-0);
+}
+
+/* Floating label placeholder fix (prevents overlap) */
+#contact .form-floating .form-control::placeholder{ opacity:0 !important; color:transparent !important; }
+
+/* Contact inputs – dark theme look */
+#contact .form-control{
+  background-color: rgba(255,255,255,.04);
+  border: 1px solid var(--stroke);
+  color: var(--ink);
+}
+#contact .form-control:focus{
+  background-color: rgba(255,255,255,.06);
+  border-color: rgba(var(--brand-rgb), .45);
+  box-shadow: 0 0 0 3px rgba(var(--brand-rgb), .18);
+  color: #fff;
+}
+#contact label{ color: var(--ink-2); }
+
+/* Quick link chips */
+#contact .contact-links{
+  display:flex; justify-content:center; flex-wrap:wrap;
+  gap:.6rem .6rem; margin: 6px 0 10px;
+}
+#contact .contact-chip{
+  display:inline-flex; align-items:center; gap:.45rem;
+  padding:.45rem .75rem; border-radius:999px; text-decoration:none; font-weight:700;
+  background: rgba(255,255,255,.06); border:1px solid var(--stroke);
+  color: var(--ink-2);
+  transition: background .15s ease, border-color .15s ease, transform .12s ease;
+}
+#contact .contact-chip i{ font-size:1rem; color:#9ac1ff; line-height:1; }
+#contact .contact-chip:hover{
+  background: rgba(255,255,255,.12);
+  border-color: rgba(154,193,255,.35);
+  color:#fff; transform: translateY(-1px);
+}
+
+/* Icons + copyright */
+#contact .mt-3 a{ color: rgba(231,236,245,.78) !important; }
+#contact .mt-3 a:hover{ color:#fff !important; }
+#contact #contact-copy{ color: var(--ink-2) !important; opacity:.95; }
+
+/* Keep Contact section in one snap viewport and ensure copyright is visible */
+#contact.page-section{
+  padding-block: calc(var(--nav-h) + 8px) 16px !important;
+  min-height: calc(100dvh - var(--nav-h)) !important;
+  background:
+    var(--dot),
+    radial-gradient(1200px 800px at 20% -10%, #15243f 0%, transparent 60%),
+    linear-gradient(180deg, #0b1220 0%, #0b1220 100%);
+  background-size: var(--dot-size), auto, auto;
+  background-color: var(--bg-0);
+}
+
+/* Tighten vertical rhythm so everything fits */
+#contact .intro-text{ margin: 8px 0 12px !important; }
+#contact .row.mb-4{ margin-bottom: 14px !important; }
+#contact .form-floating{ margin-bottom: 10px !important; }
+#contact .btn.btn-xl{ margin-top: 6px !important; }
+
+/* Floating label placeholder fix */
+#contact .form-floating .form-control::placeholder{ opacity:0 !important; color:transparent !important; }
+
+/* Dark theme inputs */
+#contact .form-control{
+  background-color: rgba(255,255,255,.04);
+  border: 1px solid var(--stroke);
+  color: var(--ink);
+}
+#contact .form-control:focus{
+  background-color: rgba(255,255,255,.06);
+  border-color: rgba(var(--brand-rgb), .45);
+  box-shadow: 0 0 0 3px rgba(var(--brand-rgb), .18);
+  color: #fff;
+}
+#contact label{ color: var(--ink-2); }
+
+/* Top link chips — upgraded look */
+#contact .contact-links--top{
+  display:flex; justify-content:center; flex-wrap:wrap;
+  gap:.6rem .6rem; margin: 6px 0 6px;
+}
+#contact .contact-chip{
+  --chip-bg: rgba(255,255,255,.06);
+  --chip-border: var(--stroke);
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.5rem .9rem; border-radius:999px; text-decoration:none; font-weight:700;
+  background: var(--chip-bg); border:1px solid var(--chip-border);
+  color: var(--ink-2);
+  transition: transform .12s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+#contact .contact-chip i{
+  font-size:1.05rem; line-height:1; color:#9ac1ff;
+}
+#contact .contact-chip:hover{
+  background: rgba(255,255,255,.12);
+  border-color: rgba(154,193,255,.35);
+  color:#fff;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(0,0,0,.25);
+}
+
+/* Icons + copyright color */
+#contact .mt-2 a{ color: rgba(231,236,245,.78) !important; }
+#contact .mt-2 a:hover{ color:#fff !important; }
+#contact #contact-copy{ color: var(--ink-2) !important; opacity:.95; }
+
+/* Slightly shorter textarea on wide screens to keep copyright visible */
+@media (min-width: 992px){
+  #contact textarea#message{ height: 8rem !important; }
+}
+
+/* Contact layout */
+#contact.page-section{
+  padding-block: calc(var(--nav-h) + 8px) 16px !important;
+  min-height: calc(100dvh - var(--nav-h)) !important;
+}
+
+#contact .contact-split{
+  display: grid;
+  grid-template-columns: 1.2fr .8fr; /* form | resources */
+  gap: 1.25rem;
+  align-items: start;
+}
+@media (max-width: 992px){
+  #contact .contact-split{ grid-template-columns: 1fr; }
+}
+
+/* Form look in dark theme */
+#contact .form-floating{ margin-bottom: 10px !important; }
+#contact .form-floating .form-control::placeholder{ opacity:0; color:transparent; } /* prevents double text */
+#contact .form-control{
+  background-color: rgba(255,255,255,.04);
+  border:1px solid var(--stroke);
+  color: var(--ink);
+}
+#contact .form-control:focus{
+  background-color: rgba(255,255,255,.06);
+  border-color: rgba(var(--brand-rgb), .45);
+  box-shadow: 0 0 0 3px rgba(var(--brand-rgb), .18);
+  color:#fff;
+}
+#contact label{ color: var(--ink-2); }
+
+/* Resources stack */
+#contact .contact-resources{
+  display:flex; flex-direction:column; gap:.75rem;
+}
+#contact .resource-card{
+  display:flex; align-items:center; gap:.75rem;
+  padding:.85rem 1rem;
+  border-radius:.9rem;
+  background: rgba(255,255,255,.04);
+  border:1px solid var(--stroke);
+  text-decoration:none;
+  color: var(--ink-2);
+  transition: transform .12s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+#contact .resource-card:hover{
+  background: rgba(255,255,255,.08);
+  border-color: rgba(154,193,255,.35);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(0,0,0,.25);
+}
+#contact .rc-icon{ color:#9ac1ff; font-size:1.15rem; line-height:1; }
+#contact .rc-body strong{ display:block; color:#fff; font-weight:800; line-height:1.1; }
+#contact .rc-body span{ font-size:.85rem; color:var(--ink-3); }
+#contact .rc-arrow{ margin-left:auto; color:#9fb6d9; }
+
+/* Socials + copyright colors */
+#contact .mt-3 a{ color: rgba(231,236,245,.78) !important; }
+#contact .mt-3 a:hover{ color:#fff !important; }
+#contact #contact-copy{ color: var(--ink-2) !important; opacity:.95; }
+
+/* Contact split: make form big, links a fixed tidy column */
+#contact .contact-split{
+  display: grid;
+  grid-template-columns: minmax(520px, 1fr) 360px; /* form | links card */
+  gap: 1.25rem;
+  align-items: start;
+}
+@media (max-width: 992px){
+  #contact .contact-split{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Compact “Quick Links” card */
+#contact .resources-card{
+  background: var(--panel);
+  border: 1px solid var(--stroke);
+  border-radius: .95rem;
+  box-shadow: 0 8px 26px rgba(0,0,0,.25);
+  overflow: hidden;
+}
+
+/* header */
+#contact .resources-card .rc-header{
+  display:flex; align-items:center; gap:.5rem;
+  padding: .75rem 1rem .6rem 1rem;
+  color:#cfe2ff; font-weight:800; letter-spacing:.2px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+#contact .resources-card .rc-header i{ color:#9ac1ff; }
+
+/* each row link */
+#contact .resources-card .res-row{
+  display:flex; align-items:center; gap:.75rem;
+  padding: .85rem 1rem;
+  text-decoration:none;
+  color: var(--ink-2);
+  transition: background .15s ease, transform .1s ease, border-color .15s ease;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+#contact .resources-card .res-row:first-of-type{ border-top: none; }
+
+#contact .resources-card .res-row:hover{
+  background: rgba(255,255,255,.05);
+  transform: translateY(-1px);
+}
+
+#contact .resources-card .res-icon{ color:#9ac1ff; font-size:1.1rem; }
+#contact .resources-card .res-body strong{ display:block; color:#fff; line-height:1.05; }
+#contact .resources-card .res-body span{ display:block; font-size:.85rem; color:var(--ink-3); }
+#contact .resources-card .res-arrow{ margin-left:auto; color:#9fb6d9; }
+
+/* If the old right-side card still exists anywhere, hide it */
+#contact .resources-card { display: none !important; }
+
+/* Quick links row under the submit button */
+.quick-links-row{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:.65rem;
+  flex-wrap:wrap;
+  margin: .25rem auto 0;   /* tight to the button */
+  max-width: 820px;
+}
+
+.quick-links-row .ql-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  padding:.55rem .85rem;
+  border-radius:999px;
+  text-decoration:none;
+  font-weight:700;
+  color:#cfe2ff;
+  background: rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow: 0 6px 16px rgba(0,0,0,.18);
+  transition: background .15s ease, border-color .15s ease, transform .08s ease;
+}
+.quick-links-row .ql-pill i{ font-size:1rem; color:#9ac1ff; }
+
+.quick-links-row .ql-pill:hover{
+  background: rgba(255,255,255,.10);
+  border-color: rgba(154,193,255,.35);
+  transform: translateY(-1px);
+}
+.quick-links-row .ql-pill:focus-visible{
+  outline:2px solid rgba(154,193,255,.65);
+  outline-offset:2px;
+  border-color: transparent;
+}
+
+/* Keep icons/copyright comfortably below links */
+#contact .contact-icons{ margin-top: 0px; }
+
+/* Keep copyright fully visible (safe-area aware + a bit more bottom room) */
+#contact.page-section{
+  padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px)) !important;
+  min-height: min(
+    calc(100svh - var(--nav-h) - env(safe-area-inset-bottom, 0px)),
+    calc(100vh - var(--nav-h))
+  ) !important;
+}
+
+/* Make sure the copyright itself never gets clipped */
+#contact #contact-copy{
+  margin-bottom: 0 !important;
+  display: block;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Slightly shorter textarea on wide screens to prevent push-down */
+@media (min-width: 992px){
+  #contact textarea#message{ height: 7rem !important; }
+}
